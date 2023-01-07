@@ -6,7 +6,7 @@
   "name": "tree-sitter-snakemake",
   "version": "0.0.1",
   "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
-  "main": "grammar.js",
+  "main": "bindings/node",
   "scripts": {
     "test": "tree-sitter test"
   },
