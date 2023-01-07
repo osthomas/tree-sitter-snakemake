@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "name": "tree-sitter-snakemake",
+  "version": "0.0.1",
+  "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
+  "main": "grammar.js",
+  "scripts": {
+    "test": "tree-sitter test"
+  },
+  "keywords": [
+    "parser",
+    "snakemake",
+    "python"
+  ],
+  "author": "Oliver Thomas",
+  "license": "MIT"
+}
