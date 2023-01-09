@@ -1,0 +1,68 @@
+===============================================================================
+Non-rule directives
+===============================================================================
+
+configfile:
+  a
+include: a
+workdir: a
+container: a
+localrules: a
+localrules: a, b
+wildcard_constraints:
+    a = "\d+"
+
+-------------------------------------------------------------------------------
+
+(module
+  (configfile_directive
+    (directive_parameters
+      (identifier)))
+  (include_directive
+    (directive_parameters
+      (identifier)))
+  (workdir_directive
+    (directive_parameters
+      (identifier)))
+  (container_directive
+    (directive_parameters
+      (identifier)))
+  (localrules_directive
+    (directive_parameters
+      (identifier)))
+  (localrules_directive
+    (directive_parameters
+      (identifier)
+      (identifier)))
+  (wildcard_constraints_directive
+    (directive_parameters
+      (keyword_argument
+        (identifier)
+        (string))))
+)
+
+
+===============================================================================
+onstart, onsuccess, onerror
+===============================================================================
+
+onstart:
+  pass
+onsuccess:
+  pass
+onerror:
+  pass
+
+-------------------------------------------------------------------------------
+
+(module
+  (onstart_directive
+    (block
+      (pass_statement)))
+  (onsuccess_directive
+    (block
+      (pass_statement)))
+  (onerror_directive
+    (block
+      (pass_statement)))
+)
