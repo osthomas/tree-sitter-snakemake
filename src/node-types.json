@@ -1365,11 +1365,19 @@
           "named": true
         },
         {
+          "type": "format_wildcard_string",
+          "named": true
+        },
+        {
           "type": "keyword_argument",
           "named": true
         },
         {
           "type": "list_splat",
+          "named": true
+        },
+        {
+          "type": "wildcard_string",
           "named": true
         }
       ]
@@ -1666,6 +1674,40 @@
       "types": [
         {
           "type": "format_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "format_wildcard",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "wildcard_contents",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "format_wildcard_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "format_wildcard",
+          "named": true
+        },
+        {
+          "type": "interpolation",
           "named": true
         }
       ]
@@ -2806,7 +2848,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "benchmark_directive",
@@ -3530,6 +3572,21 @@
     }
   },
   {
+    "type": "wildcard",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "wildcard_contents",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "wildcard_constraints_directive",
     "named": true,
     "fields": {
@@ -3546,9 +3603,39 @@
     }
   },
   {
+    "type": "wildcard_contents",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "wildcard_import",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "wildcard_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "with_clause",

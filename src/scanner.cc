@@ -21,6 +21,8 @@ enum TokenType {
   CLOSE_PAREN,
   CLOSE_BRACKET,
   CLOSE_BRACE,
+  WILDCARD_STRING_START,
+  FORMAT_WILDCARD_STRING_START,
 };
 
 struct Delimiter {
@@ -32,6 +34,7 @@ struct Delimiter {
     Format = 1 << 4,
     Triple = 1 << 5,
     Bytes = 1 << 6,
+    Wildcard = 1 << 7,
   };
 
   Delimiter() : flags(0) {}
@@ -50,6 +53,10 @@ struct Delimiter {
 
   bool is_bytes() const {
     return flags & Bytes;
+  }
+
+  bool is_wildcard() const {
+      return flags & Wildcard;
   }
 
   int32_t end_character() const {
@@ -73,6 +80,10 @@ struct Delimiter {
 
   void set_bytes() {
     flags |= Bytes;
+  }
+
+  void set_wildcard() {
+      flags |= Wildcard;
   }
 
   void set_end_character(int32_t character) {
@@ -163,6 +174,18 @@ struct Scanner {
       while (lexer->lookahead) {
         if ((lexer->lookahead == '{' || lexer->lookahead == '}') && delimiter.is_format()) {
           lexer->mark_end(lexer);
+          lexer->result_symbol = STRING_CONTENT;
+          return has_content;
+        } else if ((lexer->lookahead == '{' || lexer->lookahead == '}') && delimiter.is_wildcard()) {
+          lexer->mark_end(lexer);
+          lexer->advance(lexer, false);
+          // Consume { and } to the final pair -> regular string content
+          // remove while to make repeat work
+          while (lexer->lookahead == '{') {
+            has_content = true;
+            lexer->mark_end(lexer);
+            lexer->advance(lexer, false);
+          }
           lexer->result_symbol = STRING_CONTENT;
           return has_content;
         } else if (lexer->lookahead == '\\') {
@@ -329,6 +352,9 @@ struct Scanner {
         has_flags = true;
         advance(lexer);
       }
+      if (valid_symbols[WILDCARD_STRING_START]) {
+        delimiter.set_wildcard();
+      }
 
       if (lexer->lookahead == '`') {
         delimiter.set_end_character('`');
@@ -362,7 +388,15 @@ struct Scanner {
 
       if (delimiter.end_character()) {
         delimiter_stack.push_back(delimiter);
-        lexer->result_symbol = STRING_START;
+        if (valid_symbols[WILDCARD_STRING_START] && delimiter.is_wildcard()) {
+          if (delimiter.is_format()) {
+            lexer->result_symbol = FORMAT_WILDCARD_STRING_START;
+          } else {
+            lexer ->result_symbol = WILDCARD_STRING_START;
+          }
+        } else {
+          lexer->result_symbol = STRING_START;
+        }
         return true;
       } else if (has_flags) {
         return false;

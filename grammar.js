@@ -7,7 +7,13 @@ module.exports = grammar(PYTHON, {
     name: "snakemake",
 
     conflicts: ($, original) => original.concat([
-        [$._rule_import_list, $.rule_inheritance]
+        [$._rule_import_list, $.rule_inheritance],
+        [$.wildcard_string, $.string],
+    ]),
+
+    externals: ($, original) => original.concat([
+        $._wildcard_string_start,
+        $._format_wildcard_string_start
     ]),
 
     rules: {
@@ -94,7 +100,7 @@ module.exports = grammar(PYTHON, {
 
         rule_body: $ => seq(
             $._indent,
-            repeat1(
+            repeat(
                 choice(
                     prec(-1, $.string),
                     prec(1, $.concatenated_string), // docstrings
@@ -379,6 +385,68 @@ module.exports = grammar(PYTHON, {
             field("body", $._suite)
         ),
 
+        // string: ($, original) => prec.dynamic(1, original),
+        _wildcard_strings: $ => choice(
+            $.wildcard_string,
+            $.format_wildcard_string
+        ),
+
+        wildcard_string: $ => seq(
+            alias($._wildcard_string_start, "\""),
+            repeat(choice(
+                $._string_content,
+                $.wildcard
+                // seq(repeat("{"), $.wildcard, repeat("}"))
+            )),
+            alias($._string_end, "\"")
+        ),
+
+        wildcard: $ => seq(
+            "{",
+            $.wildcard_contents,
+            // optional($.constraint),
+            "}"
+        ),
+
+        format_wildcard_string: $ => seq(
+            alias($._format_wildcard_string_start, "\""),
+            repeat(choice(
+                $._string_content,
+                $.interpolation,
+                $.format_wildcard
+            )),
+            alias($._string_end, "\"")
+        ),
+
+        format_wildcard: $ => prec(1, seq(
+            "{{",
+            $.wildcard_contents,
+            "}}"
+        )),
+
+        wildcard_contents: $ => seq(
+            $.identifier,
+            // repeat(choice(
+            //     seq("[", choice($.expression, $.slice), "]"),
+            //     seq(".", $.identifier)
+            // ))
+        ),
+
+        // Escaping an interpolation in an f string allows snakemake to
+        // interpolate wildcards
+        wildcard_escape_interpolation: $ => seq(
+            '{',
+            $.wildcard,
+            '}'
+        ),
+
+        _escape_wildcard: $ => prec(1, choice("{{", "}}")),
+
+        constraint: $ => seq(
+            ",",
+            repeat(choice($.escape_sequence, $._not_escape_sequence, /[a-zA-Z+\\]/))
+        ),
+
         directive_parameters: $ => choice(
             // Single line
             seq(
@@ -404,6 +472,8 @@ module.exports = grammar(PYTHON, {
 
         _directive_parameter: $ => choice(
             $.expression,
+            $._wildcard_strings,
+            // alias($.wildcard_string, $.string),
             $.keyword_argument,
             $.list_splat,
             $.dictionary_splat
