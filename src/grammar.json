@@ -6627,10 +6627,6 @@
         {
           "type": "SYMBOL",
           "name": "concatenated_wildcard_string"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "format_wildcard_string"
         }
       ]
     },
@@ -6654,6 +6650,14 @@
               {
                 "type": "SYMBOL",
                 "name": "_string_content"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "escape_sequence"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_not_escape_sequence"
               },
               {
                 "type": "SEQ",
@@ -6727,130 +6731,6 @@
           ]
         }
       ]
-    },
-    "format_wildcard_string": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_format_wildcard_string_start"
-          },
-          "named": false,
-          "value": "\""
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_string_content"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "interpolation"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "{{"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "wildcard_definition"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "}}"
-                  }
-                ]
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "{{"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "}}"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_string_end"
-          },
-          "named": false,
-          "value": "\""
-        }
-      ]
-    },
-    "format_wildcard": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "{{"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "wildcard_contents"
-          },
-          {
-            "type": "STRING",
-            "value": "}}"
-          }
-        ]
-      }
-    },
-    "wildcard_contents": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "subscript"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "attribute"
-        }
-      ]
-    },
-    "_escape_wildcard": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "{{"
-          },
-          {
-            "type": "STRING",
-            "value": "}}"
-          }
-        ]
-      }
     },
     "constraints": {
       "type": "PATTERN",
@@ -7115,10 +6995,6 @@
     {
       "type": "SYMBOL",
       "name": "_wildcard_string_start"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_format_wildcard_string_start"
     }
   ],
   "inline": [

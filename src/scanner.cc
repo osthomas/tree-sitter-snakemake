@@ -22,7 +22,6 @@ enum TokenType {
   CLOSE_BRACKET,
   CLOSE_BRACE,
   WILDCARD_STRING_START,
-  FORMAT_WILDCARD_STRING_START,
 };
 
 struct Delimiter {
@@ -394,11 +393,7 @@ struct Scanner {
       if (delimiter.end_character()) {
         delimiter_stack.push_back(delimiter);
         if (valid_symbols[WILDCARD_STRING_START] && delimiter.is_wildcard()) {
-          if (delimiter.is_format()) {
-            lexer->result_symbol = FORMAT_WILDCARD_STRING_START;
-          } else {
-            lexer ->result_symbol = WILDCARD_STRING_START;
-          }
+          lexer ->result_symbol = WILDCARD_STRING_START;
         } else {
           lexer->result_symbol = STRING_START;
         }

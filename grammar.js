@@ -13,8 +13,7 @@ module.exports = grammar(PYTHON, {
     ]),
 
     externals: ($, original) => original.concat([
-        $._wildcard_string_start,
-        $._format_wildcard_string_start
+        $._wildcard_string_start
     ]),
 
     rules: {
@@ -395,14 +394,15 @@ module.exports = grammar(PYTHON, {
 
         wildcard_string: $ => choice(
             $._wildcard_definition,
-            $.concatenated_wildcard_string,
-            $.format_wildcard_string
+            $.concatenated_wildcard_string
         ),
 
         _wildcard_definition: $ => seq(
             alias($._wildcard_string_start, "\""),
             repeat(choice(
                 $._string_content,
+                $.escape_sequence,
+                $._not_escape_sequence,
                 seq("{", $.wildcard_definition, "}"),
                 "{}" // empty brackets are not a wildcard
             )),
@@ -413,39 +413,6 @@ module.exports = grammar(PYTHON, {
             field("name", $.identifier),
             optional(field("constraints", seq(",", $.constraints))),
         ),
-
-        format_wildcard_string: $ => seq(
-            alias($._format_wildcard_string_start, "\""),
-            repeat(choice(
-                $._string_content,
-                $.interpolation,
-                seq("{{", $.wildcard_definition, "}}"),
-                choice("{{", "}}"),
-            )),
-            alias($._string_end, "\"")
-        ),
-
-        format_wildcard: $ => prec(1, seq(
-            "{{",
-            $.wildcard_contents,
-            "}}"
-        )),
-
-        wildcard_contents: $ => choice(
-            $.identifier,
-            $.subscript,
-            $.attribute
-        ),
-
-        // Escaping an interpolation in an f string allows snakemake to
-        // interpolate wildcards
-        // wildcard_escape_interpolation: $ => seq(
-        //     '{',
-        //     $.wildcard,
-        //     '}'
-        // ),
-
-        _escape_wildcard: $ => prec(1, choice("{{", "}}")),
 
         // regex to match a regex ...
         // explicitly specify bracketed quantifier to consume paired
@@ -477,7 +444,6 @@ module.exports = grammar(PYTHON, {
 
         _directive_parameter: $ => choice(
             $.expression,
-            // $.wildcard_string,
             alias($.wildcard_string, $.string),
             $.keyword_argument,
             $.list_splat,
