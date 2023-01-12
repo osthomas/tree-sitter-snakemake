@@ -43,3 +43,48 @@ rule:
     )
   )
 )
+
+
+===============================================================================
+Wildcard Interpolations
+===============================================================================
+
+rule:
+  input: "{a}"
+  shell:
+    """
+    {a}
+    """
+  shell:
+    """
+    {input.a}
+    """
+    "output"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (input_directive
+        (directive_parameters
+          (string
+            (wildcard_definition
+              (identifier)))))
+      (shell_directive
+        (directive_parameters
+          (string
+            (wildcard
+              (identifier)))))
+      (shell_directive
+        (directive_parameters
+          (concatenated_string
+            (string
+              (wildcard
+                (attribute
+                  (identifier)
+                  (identifier))))
+            (string))))
+    )
+  )
+)

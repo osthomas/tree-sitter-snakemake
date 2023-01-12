@@ -1072,25 +1072,6 @@
     }
   },
   {
-    "type": "concatenated_wildcard_string",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "wildcard_string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "conda_directive",
     "named": true,
     "fields": {
@@ -1375,6 +1356,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "concatenated_string",
+          "named": true
+        },
         {
           "type": "dictionary_splat",
           "named": true
@@ -3249,15 +3234,15 @@
       "required": false,
       "types": [
         {
-          "type": "concatenated_wildcard_string",
-          "named": true
-        },
-        {
           "type": "escape_sequence",
           "named": true
         },
         {
           "type": "interpolation",
+          "named": true
+        },
+        {
+          "type": "wildcard",
           "named": true
         },
         {
@@ -3565,6 +3550,29 @@
     }
   },
   {
+    "type": "wildcard",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "wildcard_constraints_directive",
     "named": true,
     "fields": {
@@ -3614,29 +3622,6 @@
     "type": "wildcard_import",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "wildcard_string",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "concatenated_wildcard_string",
-          "named": true
-        },
-        {
-          "type": "escape_sequence",
-          "named": true
-        },
-        {
-          "type": "wildcard_definition",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "with_clause",

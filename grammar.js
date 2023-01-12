@@ -8,8 +8,10 @@ module.exports = grammar(PYTHON, {
 
     conflicts: ($, original) => original.concat([
         [$._rule_import_list, $.rule_inheritance],
-        [$.wildcard_string, $.string],
-        [$.concatenated_wildcard_string, $.concatenated_string],
+        [$.string_wc_def, $.string],
+        [$.string_wc_interp, $.string],
+        [$.concatenated_string_wc_def, $.concatenated_string],
+        [$.concatenated_string_wc_interp, $.concatenated_string],
     ]),
 
     externals: ($, original) => original.concat([
@@ -166,69 +168,69 @@ module.exports = grammar(PYTHON, {
         // Directives with parameters
 
         benchmark_directive: $ => new_directive("benchmark", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         cache_directive: $ => new_directive("cache", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         conda_directive: $ => new_directive("conda", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         config_directive: $ => new_directive("config", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         configfile_directive: $ => new_directive("configfile", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         container_directive: $ => new_directive("container", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         cwl_directive: $ => new_directive("cwl", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         handover_directive: $ => new_directive("handover", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         include_directive: $ => new_directive("include", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         input_directive: $ => new_directive("input", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         localrules_directive: $ => new_directive("localrules", "arguments",
             alias($.directive_parameters_identifiers, $.directive_parameters)),
         log_directive: $ => new_directive("log", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         message_directive: $ => new_directive("message", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         meta_wrapper_directive: $ => new_directive("meta_wrapper", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         notebook_directive: $ => new_directive("notebook", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         output_directive: $ => new_directive("output", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         params_directive: $ => new_directive("params", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         prefix_directive: $ => new_directive("prefix", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         priority_directive: $ => new_directive("priority", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         resources_directive: $ => new_directive("resources", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         retries_directive: $ => new_directive("retries", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         script_directive: $ => new_directive("script", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         shadow_directive: $ => new_directive("shadow", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         shell_directive: $ => new_directive("shell", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_interp, $.directive_parameters)),
         singularity_directive: $ => new_directive("singularity", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         skip_validation_directive: $ => new_directive("skip_validation", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         snakefile_directive: $ => new_directive("snakefile", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         threads_directive: $ => new_directive("threads", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         version_directive: $ => new_directive("version", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         wildcard_constraints_directive: $ => new_directive("wildcard_constraints", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         workdir_directive: $ => new_directive("workdir", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
         wrapper_directive: $ => new_directive("wrapper", "arguments",
-            $.directive_parameters),
+            alias($.directive_parameters_wc_def, $.directive_parameters)),
 
         // Directives with code blocks
 
@@ -239,12 +241,22 @@ module.exports = grammar(PYTHON, {
 
         // Possible parameters vary by directive
 
-        directive_parameters: $ => directive_parameters($, $._directive_parameter),
+        // Parameters for directives in which wildcards are defined
+        directive_parameters_wc_def: $ => directive_parameters($, choice(
+            $._directive_parameter,
+            alias($.string_wc_def, $.string),
+            alias($.concatenated_string_wc_def, $.concatenated_string)
+        )),
+        // Parameters for directives in which wildcards are interpolated
+        directive_parameters_wc_interp: $ => directive_parameters($, choice(
+            $._directive_parameter,
+            alias($.string_wc_interp, $.string),
+            alias($.concatenated_string_wc_interp, $.concatenated_string)
+        )),
         directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
 
         _directive_parameter: $ => choice(
             $.expression,
-            alias($.wildcard_string, $.string),
             $.keyword_argument,
             $.list_splat,
             $.dictionary_splat
@@ -254,17 +266,17 @@ module.exports = grammar(PYTHON, {
         // string: ($, original) => prec.dynamic(1, original),
         concatenated_string: ($, original) => prec.right(original),
 
-        concatenated_wildcard_string: $ => prec.right(1, seq(
-            choice($.string, $.wildcard_string),
-            repeat1(choice($.string, $.wildcard_string))
+        concatenated_string_wc_def: $ => prec.right(1, seq(
+            alias(choice($.string, $.string_wc_def), $.string),
+            repeat1(alias(choice($.string, $.string_wc_def), $.string))
         )),
 
-        wildcard_string: $ => choice(
-            $._wildcard_definition,
-            $.concatenated_wildcard_string
-        ),
+        concatenated_string_wc_interp: $ => prec.right(1, seq(
+            alias(choice($.string, $.string_wc_interp), $.string),
+            repeat1(alias(choice($.string, $.string_wc_interp), $.string))
+        )),
 
-        _wildcard_definition: $ => seq(
+        string_wc_def: $ => seq(
             alias($._wildcard_string_start, "\""),
             repeat(choice(
                 $._string_content,
@@ -276,9 +288,27 @@ module.exports = grammar(PYTHON, {
             alias($._string_end, "\"")
         ),
 
+        string_wc_interp: $ => seq(
+            alias($._wildcard_string_start, "\""),
+            repeat(choice(
+                $._string_content,
+                $.escape_sequence,
+                $._not_escape_sequence,
+                seq("{", $.wildcard, "}"),
+                "{}" // empty brackets are not a wildcard
+            )),
+            alias($._string_end, "\"")
+        ),
+
         wildcard_definition: $ => seq(
             field("name", $.identifier),
             optional(field("constraints", seq(",", $.constraints))),
+        ),
+
+        wildcard: $ => choice(
+            $.identifier,
+            $.subscript,
+            $.attribute
         ),
 
         // regex to match a regex ...
