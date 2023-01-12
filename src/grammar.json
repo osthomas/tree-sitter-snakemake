@@ -7644,17 +7644,8 @@
           {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "string"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "string_wc_def"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "string_wc_def"
             },
             "named": true,
             "value": "string"
@@ -7664,17 +7655,8 @@
             "content": {
               "type": "ALIAS",
               "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "string"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "string_wc_def"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "string_wc_def"
               },
               "named": true,
               "value": "string"
@@ -7692,17 +7674,8 @@
           {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "string"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "string_wc_interp"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "string_wc_interp"
             },
             "named": true,
             "value": "string"
@@ -7712,17 +7685,8 @@
             "content": {
               "type": "ALIAS",
               "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "string"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "string_wc_interp"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "string_wc_interp"
               },
               "named": true,
               "value": "string"

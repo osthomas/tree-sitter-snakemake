@@ -268,13 +268,13 @@ module.exports = grammar(PYTHON, {
         concatenated_string: ($, original) => prec.right(original),
 
         concatenated_string_wc_def: $ => prec.right(1, seq(
-            alias(choice($.string, $.string_wc_def), $.string),
-            repeat1(alias(choice($.string, $.string_wc_def), $.string))
+            alias($.string_wc_def, $.string),
+            repeat1(alias($.string_wc_def, $.string))
         )),
 
         concatenated_string_wc_interp: $ => prec.right(1, seq(
-            alias(choice($.string, $.string_wc_interp), $.string),
-            repeat1(alias(choice($.string, $.string_wc_interp), $.string))
+            alias($.string_wc_interp, $.string),
+            repeat1(alias($.string_wc_interp, $.string))
         )),
 
         string_wc_def: $ => seq(

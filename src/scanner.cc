@@ -340,7 +340,13 @@ struct Scanner {
       }
     }
 
-    if (first_comment_indent_length == -1 && valid_symbols[STRING_START]) {
+    if (
+        first_comment_indent_length == -1 && (
+          valid_symbols[STRING_START] ||
+          valid_symbols[WILDCARD_STRING_START] ||
+          valid_symbols[WILDCARD_INTERP_STRING_START]
+        )
+    ) {
       Delimiter delimiter;
 
       bool has_flags = false;
