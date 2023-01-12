@@ -161,246 +161,82 @@ module.exports = grammar(PYTHON, {
 
         // Directives with parameters
 
-        benchmark_directive: $ => seq(
-            "benchmark",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        cache_directive: $ => seq(
-            "cache",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        conda_directive: $ => seq(
-            "conda",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        config_directive: $ => seq(
-            "config",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        configfile_directive: $ => seq(
-            "configfile",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        container_directive: $ => seq(
-            "container",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        cwl_directive: $ => seq(
-            "cwl",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        handover_directive: $ => seq(
-            "handover",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        include_directive: $ => seq(
-            "include",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        input_directive: $ => seq(
-            "input",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        localrules_directive: $ => seq(
-            "localrules",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        log_directive: $ => seq(
-            "log",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        message_directive: $ => seq(
-            "message",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        meta_wrapper_directive: $ => seq(
-            "meta_wrapper",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        notebook_directive: $ => seq(
-            "notebook",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        output_directive: $ => seq(
-            "output",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        params_directive: $ => seq(
-            "params",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        prefix_directive: $ => seq(
-            "prefix",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        priority_directive: $ => seq(
-            "priority",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        resources_directive: $ => seq(
-            "resources",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        retries_directive: $ => seq(
-            "retries",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        script_directive: $ => seq(
-            "script",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        shadow_directive: $ => seq(
-            "shadow",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        shell_directive: $ => seq(
-            "shell",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        singularity_directive: $ => seq(
-            "singularity",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        skip_validation_directive: $ => seq(
-            "skip_validation",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        snakefile_directive: $ => seq(
-            "snakefile",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        threads_directive: $ => seq(
-            "threads",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        version_directive: $ => seq(
-            "version",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        wildcard_constraints_directive: $ => seq(
-            "wildcard_constraints",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        workdir_directive: $ => seq(
-            "workdir",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
-
-        wrapper_directive: $ => seq(
-            "wrapper",
-            ":",
-            field("arguments", $.directive_parameters)
-        ),
+        benchmark_directive: $ => new_directive("benchmark", "arguments",
+            $.directive_parameters),
+        cache_directive: $ => new_directive("cache", "arguments",
+            $.directive_parameters),
+        conda_directive: $ => new_directive("conda", "arguments",
+            $.directive_parameters),
+        config_directive: $ => new_directive("config", "arguments",
+            $.directive_parameters),
+        configfile_directive: $ => new_directive("configfile", "arguments",
+            $.directive_parameters),
+        container_directive: $ => new_directive("container", "arguments",
+            $.directive_parameters),
+        cwl_directive: $ => new_directive("cwl", "arguments",
+            $.directive_parameters),
+        handover_directive: $ => new_directive("handover", "arguments",
+            $.directive_parameters),
+        include_directive: $ => new_directive("include", "arguments",
+            $.directive_parameters),
+        input_directive: $ => new_directive("input", "arguments",
+            $.directive_parameters),
+        localrules_directive: $ => new_directive("localrules", "arguments",
+            alias($.directive_parameters_identifiers, $.directive_parameters)),
+        log_directive: $ => new_directive("log", "arguments",
+            $.directive_parameters),
+        message_directive: $ => new_directive("message", "arguments",
+            $.directive_parameters),
+        meta_wrapper_directive: $ => new_directive("meta_wrapper", "arguments",
+            $.directive_parameters),
+        notebook_directive: $ => new_directive("notebook", "arguments",
+            $.directive_parameters),
+        output_directive: $ => new_directive("output", "arguments",
+            $.directive_parameters),
+        params_directive: $ => new_directive("params", "arguments",
+            $.directive_parameters),
+        prefix_directive: $ => new_directive("prefix", "arguments",
+            $.directive_parameters),
+        priority_directive: $ => new_directive("priority", "arguments",
+            $.directive_parameters),
+        resources_directive: $ => new_directive("resources", "arguments",
+            $.directive_parameters),
+        retries_directive: $ => new_directive("retries", "arguments",
+            $.directive_parameters),
+        script_directive: $ => new_directive("script", "arguments",
+            $.directive_parameters),
+        shadow_directive: $ => new_directive("shadow", "arguments",
+            $.directive_parameters),
+        shell_directive: $ => new_directive("shell", "arguments",
+            $.directive_parameters),
+        singularity_directive: $ => new_directive("singularity", "arguments",
+            $.directive_parameters),
+        skip_validation_directive: $ => new_directive("skip_validation", "arguments",
+            $.directive_parameters),
+        snakefile_directive: $ => new_directive("snakefile", "arguments",
+            $.directive_parameters),
+        threads_directive: $ => new_directive("threads", "arguments",
+            $.directive_parameters),
+        version_directive: $ => new_directive("version", "arguments",
+            $.directive_parameters),
+        wildcard_constraints_directive: $ => new_directive("wildcard_constraints", "arguments",
+            $.directive_parameters),
+        workdir_directive: $ => new_directive("workdir", "arguments",
+            $.directive_parameters),
+        wrapper_directive: $ => new_directive("wrapper", "arguments",
+            $.directive_parameters),
 
         // Directives with code blocks
 
-        onerror_directive: $ => seq(
-            "onerror",
-            ":",
-            field("body", $._suite)
-        ),
+        onerror_directive: $ => new_directive("onerror", "body", $._suite),
+        onstart_directive: $ => new_directive("onstart", "body", $._suite),
+        onsuccess_directive: $ => new_directive("onsuccess", "body", $._suite),
+        run_directive: $ => new_directive("run", "body", $._suite),
 
-        onstart_directive: $ => seq(
-            "onstart",
-            ":",
-            field("body", $._suite)
-        ),
+        // Possible parameters vary by directive
 
-        onsuccess_directive: $ => seq(
-            "onsuccess",
-            ":",
-            field("body", $._suite)
-        ),
-
-        run_directive: $ => seq(
-            "run",
-            ":",
-            field("body", $._suite)
-        ),
-
-        directive_parameters: $ => choice(
-            // Single line
-            seq(
-                commaSep1($._directive_parameter),
-                optional(","),
-                $._newline
-            ),
-            // Indented block
-            $._indented_directive_parameters,
-            // On opening line + subsequently indented
-            seq(
-                commaSep1($._directive_parameter),
-                ",",
-                $._indented_directive_parameters
-            )
-        ),
-
-        _indented_directive_parameters: $ => seq(
-            $._indent,
-            commaSep1($._directive_parameter),
-            $._dedent
-        ),
+        directive_parameters: $ => directive_parameters($, $._directive_parameter),
+        directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
 
         _directive_parameter: $ => choice(
             $.expression,
@@ -417,4 +253,39 @@ function commaSep1(rule) {
 
 function sep1(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)))
+}
+
+function new_directive(name, body_name, parameters) {
+    return seq(
+        name,
+        ":",
+        field(body_name, parameters)
+    )
+}
+
+function directive_parameters($, rule) {
+    return(choice(
+        // Single line
+        seq(
+            commaSep1(rule),
+            optional(","),
+            $._newline
+        ),
+        // Indented block
+        seq(
+            $._indent,
+            commaSep1(rule),
+            $._dedent
+        ),
+        // On opening line + subsequently indented
+        seq(
+            commaSep1(rule),
+            ",",
+            seq(
+                $._indent,
+                commaSep1(rule),
+                $._dedent
+            ),
+        )
+    ))
 }
