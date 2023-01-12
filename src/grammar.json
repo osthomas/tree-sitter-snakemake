@@ -6579,12 +6579,54 @@
         }
       ]
     },
-    "_wildcard_strings": {
+    "concatenated_wildcard_string": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "string"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "wildcard_string"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "string"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "wildcard_string"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "wildcard_string": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "wildcard_string"
+          "name": "_wildcard_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "concatenated_wildcard_string"
         },
         {
           "type": "SYMBOL",
@@ -6592,7 +6634,7 @@
         }
       ]
     },
-    "wildcard_string": {
+    "_wildcard_definition": {
       "type": "SEQ",
       "members": [
         {
@@ -6614,8 +6656,25 @@
                 "name": "_string_content"
               },
               {
-                "type": "SYMBOL",
-                "name": "wildcard"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "{"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "wildcard_definition"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "}"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": "{}"
               }
             ]
           }
@@ -6631,20 +6690,41 @@
         }
       ]
     },
-    "wildcard": {
+    "wildcard_definition": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "{"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "wildcard_contents"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "constraints",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "constraints"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -6674,8 +6754,34 @@
                 "name": "interpolation"
               },
               {
-                "type": "SYMBOL",
-                "name": "format_wildcard"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "{{"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "wildcard_definition"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "}}"
+                  }
+                ]
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "{{"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "}}"
+                  }
+                ]
               }
             ]
           }
@@ -6713,28 +6819,19 @@
       }
     },
     "wildcard_contents": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
           "name": "identifier"
-        }
-      ]
-    },
-    "wildcard_escape_interpolation": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "{"
         },
         {
           "type": "SYMBOL",
-          "name": "wildcard"
+          "name": "subscript"
         },
         {
-          "type": "STRING",
-          "value": "}"
+          "type": "SYMBOL",
+          "name": "attribute"
         }
       ]
     },
@@ -6755,34 +6852,9 @@
         ]
       }
     },
-    "constraint": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_not_escape_sequence"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[a-zA-Z+\\\\]"
-              }
-            ]
-          }
-        }
-      ]
+    "constraints": {
+      "type": "PATTERN",
+      "value": "([^}]|(\\{\\d+\\}))+"
     },
     "directive_parameters": {
       "type": "CHOICE",
@@ -6923,8 +6995,13 @@
           "name": "expression"
         },
         {
-          "type": "SYMBOL",
-          "name": "_wildcard_strings"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "wildcard_string"
+          },
+          "named": true,
+          "value": "string"
         },
         {
           "type": "SYMBOL",
@@ -6987,6 +7064,10 @@
     [
       "wildcard_string",
       "string"
+    ],
+    [
+      "concatenated_wildcard_string",
+      "concatenated_string"
     ]
   ],
   "precedences": [],

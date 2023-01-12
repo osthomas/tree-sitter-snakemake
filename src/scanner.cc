@@ -178,16 +178,21 @@ struct Scanner {
           return has_content;
         } else if ((lexer->lookahead == '{' || lexer->lookahead == '}') && delimiter.is_wildcard()) {
           lexer->mark_end(lexer);
-          lexer->advance(lexer, false);
-          // Consume { and } to the final pair -> regular string content
-          // remove while to make repeat work
-          while (lexer->lookahead == '{') {
-            has_content = true;
-            lexer->mark_end(lexer);
-            lexer->advance(lexer, false);
-          }
           lexer->result_symbol = STRING_CONTENT;
-          return has_content;
+          if (lexer->lookahead == '{') {
+            lexer->advance(lexer, false);
+            // Consume { and } to the final pair -> regular string content
+            while (lexer->lookahead == '{') {
+              has_content = true;
+              lexer->mark_end(lexer);
+              lexer->advance(lexer, false);
+            }
+            return has_content;
+          } else if (lexer->lookahead == '}') {
+              lexer->advance(lexer, false);
+              lexer->mark_end(lexer);
+            return true;
+          }
         } else if (lexer->lookahead == '\\') {
           if (delimiter.is_raw()) {
             lexer->advance(lexer, false);

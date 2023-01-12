@@ -9,6 +9,7 @@ module.exports = grammar(PYTHON, {
     conflicts: ($, original) => original.concat([
         [$._rule_import_list, $.rule_inheritance],
         [$.wildcard_string, $.string],
+        [$.concatenated_wildcard_string, $.concatenated_string],
     ]),
 
     externals: ($, original) => original.concat([
@@ -17,8 +18,6 @@ module.exports = grammar(PYTHON, {
     ]),
 
     rules: {
-        concatenated_string: ($, original) => prec.right(original),
-
         _compound_statement: ($, original) => choice(
             original,
             $._compound_directive
@@ -385,27 +384,34 @@ module.exports = grammar(PYTHON, {
             field("body", $._suite)
         ),
 
+        // STRINGS
         // string: ($, original) => prec.dynamic(1, original),
-        _wildcard_strings: $ => choice(
-            $.wildcard_string,
+        concatenated_string: ($, original) => prec.right(original),
+
+        concatenated_wildcard_string: $ => prec.right(1, seq(
+            choice($.string, $.wildcard_string),
+            repeat1(choice($.string, $.wildcard_string))
+        )),
+
+        wildcard_string: $ => choice(
+            $._wildcard_definition,
+            $.concatenated_wildcard_string,
             $.format_wildcard_string
         ),
 
-        wildcard_string: $ => seq(
+        _wildcard_definition: $ => seq(
             alias($._wildcard_string_start, "\""),
             repeat(choice(
                 $._string_content,
-                $.wildcard
-                // seq(repeat("{"), $.wildcard, repeat("}"))
+                seq("{", $.wildcard_definition, "}"),
+                "{}" // empty brackets are not a wildcard
             )),
             alias($._string_end, "\"")
         ),
 
-        wildcard: $ => seq(
-            "{",
-            $.wildcard_contents,
-            // optional($.constraint),
-            "}"
+        wildcard_definition: $ => seq(
+            field("name", $.identifier),
+            optional(field("constraints", seq(",", $.constraints))),
         ),
 
         format_wildcard_string: $ => seq(
@@ -413,7 +419,8 @@ module.exports = grammar(PYTHON, {
             repeat(choice(
                 $._string_content,
                 $.interpolation,
-                $.format_wildcard
+                seq("{{", $.wildcard_definition, "}}"),
+                choice("{{", "}}"),
             )),
             alias($._string_end, "\"")
         ),
@@ -424,28 +431,26 @@ module.exports = grammar(PYTHON, {
             "}}"
         )),
 
-        wildcard_contents: $ => seq(
+        wildcard_contents: $ => choice(
             $.identifier,
-            // repeat(choice(
-            //     seq("[", choice($.expression, $.slice), "]"),
-            //     seq(".", $.identifier)
-            // ))
+            $.subscript,
+            $.attribute
         ),
 
         // Escaping an interpolation in an f string allows snakemake to
         // interpolate wildcards
-        wildcard_escape_interpolation: $ => seq(
-            '{',
-            $.wildcard,
-            '}'
-        ),
+        // wildcard_escape_interpolation: $ => seq(
+        //     '{',
+        //     $.wildcard,
+        //     '}'
+        // ),
 
         _escape_wildcard: $ => prec(1, choice("{{", "}}")),
 
-        constraint: $ => seq(
-            ",",
-            repeat(choice($.escape_sequence, $._not_escape_sequence, /[a-zA-Z+\\]/))
-        ),
+        // regex to match a regex ...
+        // explicitly specify bracketed quantifier to consume paired
+        // brackets before the external scanner gets a chance to see them.
+        constraints: $ => /([^}]|(\{\d+\}))+/,
 
         directive_parameters: $ => choice(
             // Single line
@@ -472,8 +477,8 @@ module.exports = grammar(PYTHON, {
 
         _directive_parameter: $ => choice(
             $.expression,
-            $._wildcard_strings,
-            // alias($.wildcard_string, $.string),
+            // $.wildcard_string,
+            alias($.wildcard_string, $.string),
             $.keyword_argument,
             $.list_splat,
             $.dictionary_splat
