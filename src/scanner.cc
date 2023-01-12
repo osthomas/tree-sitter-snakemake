@@ -22,6 +22,7 @@ enum TokenType {
   CLOSE_BRACKET,
   CLOSE_BRACE,
   WILDCARD_STRING_START,
+  WILDCARD_INTERP_STRING_START,
 };
 
 struct Delimiter {
@@ -356,8 +357,11 @@ struct Scanner {
         has_flags = true;
         advance(lexer);
       }
-      if (valid_symbols[WILDCARD_STRING_START]) {
+      if (valid_symbols[WILDCARD_STRING_START] || valid_symbols[WILDCARD_INTERP_STRING_START]) {
         delimiter.set_wildcard();
+        if (valid_symbols[WILDCARD_INTERP_STRING_START]) {
+            delimiter.set_format();
+        }
       }
 
       if (lexer->lookahead == '`') {
@@ -394,6 +398,9 @@ struct Scanner {
         delimiter_stack.push_back(delimiter);
         if (valid_symbols[WILDCARD_STRING_START] && delimiter.is_wildcard()) {
           lexer ->result_symbol = WILDCARD_STRING_START;
+        }
+        else if (valid_symbols[WILDCARD_INTERP_STRING_START] && delimiter.is_wildcard()) {
+          lexer ->result_symbol = WILDCARD_INTERP_STRING_START;
         } else {
           lexer->result_symbol = STRING_START;
         }

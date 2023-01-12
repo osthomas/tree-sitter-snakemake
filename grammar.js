@@ -15,7 +15,8 @@ module.exports = grammar(PYTHON, {
     ]),
 
     externals: ($, original) => original.concat([
-        $._wildcard_string_start
+        $._wildcard_string_start,
+        $._wildcard_interp_string_start
     ]),
 
     rules: {
@@ -289,13 +290,13 @@ module.exports = grammar(PYTHON, {
         ),
 
         string_wc_interp: $ => seq(
-            alias($._wildcard_string_start, "\""),
+            alias($._wildcard_interp_string_start, "\""),
             repeat(choice(
                 $._string_content,
                 $.escape_sequence,
                 $._not_escape_sequence,
                 seq("{", $.wildcard, "}"),
-                "{}" // empty brackets are not a wildcard
+                $._escape_interpolation
             )),
             alias($._string_end, "\"")
         ),

@@ -7802,7 +7802,7 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "_wildcard_string_start"
+            "name": "_wildcard_interp_string_start"
           },
           "named": false,
           "value": "\""
@@ -7842,8 +7842,8 @@
                 ]
               },
               {
-                "type": "STRING",
-                "value": "{}"
+                "type": "SYMBOL",
+                "name": "_escape_interpolation"
               }
             ]
           }
@@ -8024,6 +8024,10 @@
     {
       "type": "SYMBOL",
       "name": "_wildcard_string_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_wildcard_interp_string_start"
     }
   ],
   "inline": [

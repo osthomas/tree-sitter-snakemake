@@ -60,6 +60,7 @@ rule:
     {input.a}
     """
     "output"
+    "{{output}}"
 
 -------------------------------------------------------------------------------
 
@@ -84,6 +85,7 @@ rule:
                 (attribute
                   (identifier)
                   (identifier))))
+            (string)
             (string))))
     )
   )
