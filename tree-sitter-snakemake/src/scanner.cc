@@ -21,8 +21,6 @@ enum TokenType {
   CLOSE_PAREN,
   CLOSE_BRACKET,
   CLOSE_BRACE,
-  WILDCARD_STRING_START,
-  WILDCARD_INTERP_STRING_START,
 };
 
 struct Delimiter {
@@ -34,7 +32,6 @@ struct Delimiter {
     Format = 1 << 4,
     Triple = 1 << 5,
     Bytes = 1 << 6,
-    Wildcard = 1 << 7,
   };
 
   Delimiter() : flags(0) {}
@@ -53,10 +50,6 @@ struct Delimiter {
 
   bool is_bytes() const {
     return flags & Bytes;
-  }
-
-  bool is_wildcard() const {
-      return flags & Wildcard;
   }
 
   int32_t end_character() const {
@@ -80,10 +73,6 @@ struct Delimiter {
 
   void set_bytes() {
     flags |= Bytes;
-  }
-
-  void set_wildcard() {
-      flags |= Wildcard;
   }
 
   void set_end_character(int32_t character) {
@@ -176,23 +165,6 @@ struct Scanner {
           lexer->mark_end(lexer);
           lexer->result_symbol = STRING_CONTENT;
           return has_content;
-        } else if ((lexer->lookahead == '{' || lexer->lookahead == '}') && delimiter.is_wildcard()) {
-          lexer->mark_end(lexer);
-          lexer->result_symbol = STRING_CONTENT;
-          if (lexer->lookahead == '{') {
-            lexer->advance(lexer, false);
-            // Consume { and } to the final pair -> regular string content
-            while (lexer->lookahead == '{') {
-              has_content = true;
-              lexer->mark_end(lexer);
-              lexer->advance(lexer, false);
-            }
-            return has_content;
-          } else if (lexer->lookahead == '}') {
-              lexer->advance(lexer, false);
-              lexer->mark_end(lexer);
-            return true;
-          }
         } else if (lexer->lookahead == '\\') {
           if (delimiter.is_raw()) {
             lexer->advance(lexer, false);
@@ -340,13 +312,7 @@ struct Scanner {
       }
     }
 
-    if (
-        first_comment_indent_length == -1 && (
-          valid_symbols[STRING_START] ||
-          valid_symbols[WILDCARD_STRING_START] ||
-          valid_symbols[WILDCARD_INTERP_STRING_START]
-        )
-    ) {
+    if (first_comment_indent_length == -1 && valid_symbols[STRING_START]) {
       Delimiter delimiter;
 
       bool has_flags = false;
@@ -362,12 +328,6 @@ struct Scanner {
         }
         has_flags = true;
         advance(lexer);
-      }
-      if (valid_symbols[WILDCARD_STRING_START] || valid_symbols[WILDCARD_INTERP_STRING_START]) {
-        delimiter.set_wildcard();
-        if (valid_symbols[WILDCARD_INTERP_STRING_START]) {
-            delimiter.set_format();
-        }
       }
 
       if (lexer->lookahead == '`') {
@@ -402,14 +362,7 @@ struct Scanner {
 
       if (delimiter.end_character()) {
         delimiter_stack.push_back(delimiter);
-        if (valid_symbols[WILDCARD_STRING_START] && delimiter.is_wildcard()) {
-          lexer ->result_symbol = WILDCARD_STRING_START;
-        }
-        else if (valid_symbols[WILDCARD_INTERP_STRING_START] && delimiter.is_wildcard()) {
-          lexer ->result_symbol = WILDCARD_INTERP_STRING_START;
-        } else {
-          lexer->result_symbol = STRING_START;
-        }
+        lexer->result_symbol = STRING_START;
         return true;
       } else if (has_flags) {
         return false;
