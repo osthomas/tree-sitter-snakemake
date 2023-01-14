@@ -8,10 +8,6 @@ module.exports = grammar(PYTHON, {
 
     conflicts: ($, original) => original.concat([
         [$._rule_import_list, $.rule_inheritance],
-        [$.string_wc_def, $.string],
-        [$.string_wc_interp, $.string],
-        [$.concatenated_string_wc_def, $.concatenated_string],
-        [$.concatenated_string_wc_interp, $.concatenated_string],
     ]),
 
     externals: ($, original) => original.concat([
@@ -244,15 +240,11 @@ module.exports = grammar(PYTHON, {
 
         // Parameters for directives in which wildcards are defined
         directive_parameters_wc_def: $ => directive_parameters($, choice(
-            $._directive_parameter,
-            alias($.string_wc_def, $.string),
-            alias($.concatenated_string_wc_def, $.concatenated_string)
+            $._directive_parameter
         )),
         // Parameters for directives in which wildcards are interpolated
         directive_parameters_wc_interp: $ => directive_parameters($, choice(
-            $._directive_parameter,
-            alias($.string_wc_interp, $.string),
-            alias($.concatenated_string_wc_interp, $.concatenated_string)
+            $._directive_parameter
         )),
         directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
 
@@ -264,43 +256,7 @@ module.exports = grammar(PYTHON, {
         ),
 
         // STRINGS
-        // string: ($, original) => prec.dynamic(1, original),
         concatenated_string: ($, original) => prec.right(original),
-
-        concatenated_string_wc_def: $ => prec.right(1, seq(
-            alias($.string_wc_def, $.string),
-            repeat1(alias($.string_wc_def, $.string))
-        )),
-
-        concatenated_string_wc_interp: $ => prec.right(1, seq(
-            alias($.string_wc_interp, $.string),
-            repeat1(alias($.string_wc_interp, $.string))
-        )),
-
-        string_wc_def: $ => seq(
-            alias($._wildcard_string_start, "\""),
-            repeat(choice(
-                $._string_content,
-                $.escape_sequence,
-                $._not_escape_sequence,
-                seq("{", $.wildcard_definition, "}"),
-                "{}" // empty brackets are not a wildcard
-            )),
-            alias($._string_end, "\"")
-        ),
-
-        string_wc_interp: $ => seq(
-            alias($._wildcard_interp_string_start, "\""),
-            repeat(choice(
-                $._string_content,
-                $.escape_sequence,
-                $._not_escape_sequence,
-                seq("{", $.wildcard, "}"),
-                $._escape_interpolation
-            )),
-            alias($._string_end, "\"")
-        ),
-
         wildcard_definition: $ => seq(
             field("name", $.identifier),
             optional(field("constraints", seq(",", $.constraints))),

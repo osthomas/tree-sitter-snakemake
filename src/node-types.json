@@ -1357,10 +1357,6 @@
       "required": true,
       "types": [
         {
-          "type": "concatenated_string",
-          "named": true
-        },
-        {
           "type": "dictionary_splat",
           "named": true
         },
@@ -1378,10 +1374,6 @@
         },
         {
           "type": "list_splat",
-          "named": true
-        },
-        {
-          "type": "string",
           "named": true
         }
       ]
@@ -3240,14 +3232,6 @@
         {
           "type": "interpolation",
           "named": true
-        },
-        {
-          "type": "wildcard",
-          "named": true
-        },
-        {
-          "type": "wildcard_definition",
-          "named": true
         }
       ]
     }
@@ -3550,29 +3534,6 @@
     }
   },
   {
-    "type": "wildcard",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "subscript",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "wildcard_constraints_directive",
     "named": true,
     "fields": {
@@ -3582,36 +3543,6 @@
         "types": [
           {
             "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "wildcard_definition",
-    "named": true,
-    "fields": {
-      "constraints": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "constraints",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -4265,10 +4196,6 @@
   },
   {
     "type": "{{",
-    "named": false
-  },
-  {
-    "type": "{}",
     "named": false
   },
   {

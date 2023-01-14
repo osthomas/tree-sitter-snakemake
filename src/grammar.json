@@ -6754,24 +6754,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_def"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_def"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -6790,24 +6772,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_def"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_def"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -6850,24 +6814,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_def"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_def"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -6886,24 +6832,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_def"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_def"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -6930,24 +6858,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_def"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_def"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -6966,24 +6876,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_def"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_def"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -7012,24 +6904,6 @@
                         {
                           "type": "SYMBOL",
                           "name": "_directive_parameter"
-                        },
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "string_wc_def"
-                          },
-                          "named": true,
-                          "value": "string"
-                        },
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "concatenated_string_wc_def"
-                          },
-                          "named": true,
-                          "value": "concatenated_string"
                         }
                       ]
                     },
@@ -7048,24 +6922,6 @@
                               {
                                 "type": "SYMBOL",
                                 "name": "_directive_parameter"
-                              },
-                              {
-                                "type": "ALIAS",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "string_wc_def"
-                                },
-                                "named": true,
-                                "value": "string"
-                              },
-                              {
-                                "type": "ALIAS",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "concatenated_string_wc_def"
-                                },
-                                "named": true,
-                                "value": "concatenated_string"
                               }
                             ]
                           }
@@ -7099,24 +6955,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -7135,24 +6973,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -7195,24 +7015,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -7231,24 +7033,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -7275,24 +7059,6 @@
                     {
                       "type": "SYMBOL",
                       "name": "_directive_parameter"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "string"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "concatenated_string_wc_interp"
-                      },
-                      "named": true,
-                      "value": "concatenated_string"
                     }
                   ]
                 },
@@ -7311,24 +7077,6 @@
                           {
                             "type": "SYMBOL",
                             "name": "_directive_parameter"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "string"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "concatenated_string_wc_interp"
-                            },
-                            "named": true,
-                            "value": "concatenated_string"
                           }
                         ]
                       }
@@ -7357,24 +7105,6 @@
                         {
                           "type": "SYMBOL",
                           "name": "_directive_parameter"
-                        },
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "string_wc_interp"
-                          },
-                          "named": true,
-                          "value": "string"
-                        },
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "concatenated_string_wc_interp"
-                          },
-                          "named": true,
-                          "value": "concatenated_string"
                         }
                       ]
                     },
@@ -7393,24 +7123,6 @@
                               {
                                 "type": "SYMBOL",
                                 "name": "_directive_parameter"
-                              },
-                              {
-                                "type": "ALIAS",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "string_wc_interp"
-                                },
-                                "named": true,
-                                "value": "string"
-                              },
-                              {
-                                "type": "ALIAS",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "concatenated_string_wc_interp"
-                                },
-                                "named": true,
-                                "value": "concatenated_string"
                               }
                             ]
                           }
@@ -7635,194 +7347,6 @@
         }
       ]
     },
-    "concatenated_string_wc_def": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "string_wc_def"
-            },
-            "named": true,
-            "value": "string"
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "string_wc_def"
-              },
-              "named": true,
-              "value": "string"
-            }
-          }
-        ]
-      }
-    },
-    "concatenated_string_wc_interp": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "string_wc_interp"
-            },
-            "named": true,
-            "value": "string"
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "string_wc_interp"
-              },
-              "named": true,
-              "value": "string"
-            }
-          }
-        ]
-      }
-    },
-    "string_wc_def": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_wildcard_string_start"
-          },
-          "named": false,
-          "value": "\""
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_string_content"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_not_escape_sequence"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "{"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "wildcard_definition"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "}"
-                  }
-                ]
-              },
-              {
-                "type": "STRING",
-                "value": "{}"
-              }
-            ]
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_string_end"
-          },
-          "named": false,
-          "value": "\""
-        }
-      ]
-    },
-    "string_wc_interp": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_wildcard_interp_string_start"
-          },
-          "named": false,
-          "value": "\""
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_string_content"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_not_escape_sequence"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "{"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "wildcard"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "}"
-                  }
-                ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_escape_interpolation"
-              }
-            ]
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_string_end"
-          },
-          "named": false,
-          "value": "\""
-        }
-      ]
-    },
     "wildcard_definition": {
       "type": "SEQ",
       "members": [
@@ -7925,22 +7449,6 @@
     [
       "_rule_import_list",
       "rule_inheritance"
-    ],
-    [
-      "string_wc_def",
-      "string"
-    ],
-    [
-      "string_wc_interp",
-      "string"
-    ],
-    [
-      "concatenated_string_wc_def",
-      "concatenated_string"
-    ],
-    [
-      "concatenated_string_wc_interp",
-      "concatenated_string"
     ]
   ],
   "precedences": [],
