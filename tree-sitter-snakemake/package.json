@@ -16,5 +16,14 @@
     "python"
   ],
   "author": "Oliver Thomas",
-  "license": "MIT"
+  "license": "MIT",
+  "tree-sitter": [
+    {
+      "scope": "source.snakemake",
+      "file-types": [
+        "Snakefile",
+        "smk"
+      ]
+    }
+  ]
 }
