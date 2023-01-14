@@ -3899,10 +3899,6 @@
     "named": false
   },
   {
-    "type": "constraints",
-    "named": true
-  },
-  {
     "type": "container",
     "named": false
   },
