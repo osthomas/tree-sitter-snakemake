@@ -5278,49 +5278,54 @@
       "value": "*"
     },
     "_simple_directive": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "configfile_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "container_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "include_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "localrules_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "onerror_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "onstart_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "onsuccess_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "version_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "wildcard_constraints_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "workdir_directive"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "configfile_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "container_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "include_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "localrules_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "onerror_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "onstart_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "onsuccess_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "version_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "wildcard_constraints_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "workdir_directive"
+          }
+        ]
+      },
+      "named": true,
+      "value": "directive"
     },
     "_compound_directive": {
       "type": "CHOICE",
@@ -5636,101 +5641,106 @@
       ]
     },
     "_rule_directive": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "input_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "output_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "params_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "log_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "benchmark_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "cache_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "message_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "threads_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "resources_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "conda_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "container_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "singularity_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "run_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "shell_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "script_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "notebook_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "shadow_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "priority_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "retries_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "cwl_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "handover_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "wrapper_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "wildcard_constraints_directive"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "input_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "output_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "params_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "log_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "benchmark_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "cache_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "message_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "threads_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "resources_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "conda_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "container_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "singularity_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "run_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "shell_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "script_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "notebook_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "shadow_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "priority_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "retries_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "cwl_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "handover_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "wrapper_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "wildcard_constraints_directive"
+          }
+        ]
+      },
+      "named": true,
+      "value": "directive"
     },
     "module_definition": {
       "type": "SEQ",
@@ -5799,36 +5809,45 @@
       ]
     },
     "_module_directive": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "config_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "meta_wrapper_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "prefix_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "skip_validation_directive"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "snakefile_directive"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "config_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "meta_wrapper_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "prefix_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "skip_validation_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "snakefile_directive"
+          }
+        ]
+      },
+      "named": true,
+      "value": "directive"
     },
     "benchmark_directive": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "benchmark"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "benchmark"
+          }
         },
         {
           "type": "STRING",
@@ -5848,8 +5867,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "cache"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "cache"
+          }
         },
         {
           "type": "STRING",
@@ -5869,8 +5892,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "conda"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "conda"
+          }
         },
         {
           "type": "STRING",
@@ -5890,8 +5917,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "config"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "config"
+          }
         },
         {
           "type": "STRING",
@@ -5911,8 +5942,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "configfile"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "configfile"
+          }
         },
         {
           "type": "STRING",
@@ -5932,8 +5967,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "container"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "container"
+          }
         },
         {
           "type": "STRING",
@@ -5953,8 +5992,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "cwl"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "cwl"
+          }
         },
         {
           "type": "STRING",
@@ -5974,8 +6017,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "handover"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "handover"
+          }
         },
         {
           "type": "STRING",
@@ -5995,8 +6042,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "include"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "include"
+          }
         },
         {
           "type": "STRING",
@@ -6016,8 +6067,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "input"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "input"
+          }
         },
         {
           "type": "STRING",
@@ -6037,8 +6092,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "localrules"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "localrules"
+          }
         },
         {
           "type": "STRING",
@@ -6058,8 +6117,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "log"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "log"
+          }
         },
         {
           "type": "STRING",
@@ -6079,8 +6142,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "message"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "message"
+          }
         },
         {
           "type": "STRING",
@@ -6100,8 +6167,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "meta_wrapper"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "meta_wrapper"
+          }
         },
         {
           "type": "STRING",
@@ -6121,8 +6192,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "notebook"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "notebook"
+          }
         },
         {
           "type": "STRING",
@@ -6142,8 +6217,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "output"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "output"
+          }
         },
         {
           "type": "STRING",
@@ -6163,8 +6242,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "params"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "params"
+          }
         },
         {
           "type": "STRING",
@@ -6184,8 +6267,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "prefix"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "prefix"
+          }
         },
         {
           "type": "STRING",
@@ -6205,8 +6292,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "priority"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "priority"
+          }
         },
         {
           "type": "STRING",
@@ -6226,8 +6317,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "resources"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "resources"
+          }
         },
         {
           "type": "STRING",
@@ -6247,8 +6342,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "retries"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "retries"
+          }
         },
         {
           "type": "STRING",
@@ -6268,8 +6367,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "script"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "script"
+          }
         },
         {
           "type": "STRING",
@@ -6289,8 +6392,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "shadow"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "shadow"
+          }
         },
         {
           "type": "STRING",
@@ -6310,8 +6417,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "shell"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "shell"
+          }
         },
         {
           "type": "STRING",
@@ -6331,8 +6442,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "singularity"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "singularity"
+          }
         },
         {
           "type": "STRING",
@@ -6352,8 +6467,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "skip_validation"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "skip_validation"
+          }
         },
         {
           "type": "STRING",
@@ -6373,8 +6492,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "snakefile"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "snakefile"
+          }
         },
         {
           "type": "STRING",
@@ -6394,8 +6517,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "threads"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "threads"
+          }
         },
         {
           "type": "STRING",
@@ -6415,8 +6542,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "version"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "version"
+          }
         },
         {
           "type": "STRING",
@@ -6436,8 +6567,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "wildcard_constraints"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "wildcard_constraints"
+          }
         },
         {
           "type": "STRING",
@@ -6457,8 +6592,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "workdir"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "workdir"
+          }
         },
         {
           "type": "STRING",
@@ -6478,8 +6617,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "wrapper"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "wrapper"
+          }
         },
         {
           "type": "STRING",
@@ -6499,8 +6642,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "onerror"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "onerror"
+          }
         },
         {
           "type": "STRING",
@@ -6520,8 +6667,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "onstart"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "onstart"
+          }
         },
         {
           "type": "STRING",
@@ -6541,8 +6692,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "onsuccess"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "onsuccess"
+          }
         },
         {
           "type": "STRING",
@@ -6562,8 +6717,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "run"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "run"
+          }
         },
         {
           "type": "STRING",
@@ -7090,6 +7249,9 @@
     "_expressions",
     "_left_hand_side",
     "keyword_identifier",
+    "_simple_directive",
+    "_rule_directive",
+    "_module_directive",
     "directive_parameters_identifiers"
   ],
   "supertypes": [

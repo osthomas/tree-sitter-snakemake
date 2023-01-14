@@ -631,22 +631,6 @@
     }
   },
   {
-    "type": "benchmark_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "binary_operator",
     "named": true,
     "fields": {
@@ -747,47 +731,11 @@
           "named": true
         },
         {
-          "type": "configfile_directive",
-          "named": true
-        },
-        {
-          "type": "container_directive",
-          "named": true
-        },
-        {
-          "type": "include_directive",
-          "named": true
-        },
-        {
-          "type": "localrules_directive",
-          "named": true
-        },
-        {
-          "type": "onerror_directive",
-          "named": true
-        },
-        {
-          "type": "onstart_directive",
-          "named": true
-        },
-        {
-          "type": "onsuccess_directive",
+          "type": "directive",
           "named": true
         },
         {
           "type": "rule_import",
-          "named": true
-        },
-        {
-          "type": "version_directive",
-          "named": true
-        },
-        {
-          "type": "wildcard_constraints_directive",
-          "named": true
-        },
-        {
-          "type": "workdir_directive",
           "named": true
         }
       ]
@@ -837,22 +785,6 @@
     "type": "break_statement",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "cache_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "call",
@@ -1072,22 +1004,6 @@
     }
   },
   {
-    "type": "conda_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "conditional_expression",
     "named": true,
     "fields": {},
@@ -1103,73 +1019,9 @@
     }
   },
   {
-    "type": "config_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "configfile_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "container_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "continue_statement",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "cwl_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "decorated_definition",
@@ -1346,6 +1198,182 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "directive",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "directive_parameters",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "benchmark",
+            "named": false
+          },
+          {
+            "type": "cache",
+            "named": false
+          },
+          {
+            "type": "conda",
+            "named": false
+          },
+          {
+            "type": "config",
+            "named": false
+          },
+          {
+            "type": "configfile",
+            "named": false
+          },
+          {
+            "type": "container",
+            "named": false
+          },
+          {
+            "type": "cwl",
+            "named": false
+          },
+          {
+            "type": "handover",
+            "named": false
+          },
+          {
+            "type": "include",
+            "named": false
+          },
+          {
+            "type": "input",
+            "named": false
+          },
+          {
+            "type": "localrules",
+            "named": false
+          },
+          {
+            "type": "log",
+            "named": false
+          },
+          {
+            "type": "message",
+            "named": false
+          },
+          {
+            "type": "meta_wrapper",
+            "named": false
+          },
+          {
+            "type": "notebook",
+            "named": false
+          },
+          {
+            "type": "onerror",
+            "named": false
+          },
+          {
+            "type": "onstart",
+            "named": false
+          },
+          {
+            "type": "onsuccess",
+            "named": false
+          },
+          {
+            "type": "output",
+            "named": false
+          },
+          {
+            "type": "params",
+            "named": false
+          },
+          {
+            "type": "prefix",
+            "named": false
+          },
+          {
+            "type": "priority",
+            "named": false
+          },
+          {
+            "type": "resources",
+            "named": false
+          },
+          {
+            "type": "retries",
+            "named": false
+          },
+          {
+            "type": "run",
+            "named": false
+          },
+          {
+            "type": "script",
+            "named": false
+          },
+          {
+            "type": "shadow",
+            "named": false
+          },
+          {
+            "type": "shell",
+            "named": false
+          },
+          {
+            "type": "singularity",
+            "named": false
+          },
+          {
+            "type": "skip_validation",
+            "named": false
+          },
+          {
+            "type": "snakefile",
+            "named": false
+          },
+          {
+            "type": "threads",
+            "named": false
+          },
+          {
+            "type": "version",
+            "named": false
+          },
+          {
+            "type": "wildcard_constraints",
+            "named": false
+          },
+          {
+            "type": "workdir",
+            "named": false
+          },
+          {
+            "type": "wrapper",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -1787,22 +1815,6 @@
     }
   },
   {
-    "type": "handover_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "if_clause",
     "named": true,
     "fields": {},
@@ -1920,38 +1932,6 @@
           },
           {
             "type": "dotted_name",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "include_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "input_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
             "named": true
           }
         ]
@@ -2164,38 +2144,6 @@
     }
   },
   {
-    "type": "localrules_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "log_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "match_statement",
     "named": true,
     "fields": {
@@ -2222,38 +2170,6 @@
     }
   },
   {
-    "type": "message_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "meta_wrapper_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "module",
     "named": true,
     "fields": {},
@@ -2270,47 +2186,11 @@
           "named": true
         },
         {
-          "type": "configfile_directive",
-          "named": true
-        },
-        {
-          "type": "container_directive",
-          "named": true
-        },
-        {
-          "type": "include_directive",
-          "named": true
-        },
-        {
-          "type": "localrules_directive",
-          "named": true
-        },
-        {
-          "type": "onerror_directive",
-          "named": true
-        },
-        {
-          "type": "onstart_directive",
-          "named": true
-        },
-        {
-          "type": "onsuccess_directive",
+          "type": "directive",
           "named": true
         },
         {
           "type": "rule_import",
-          "named": true
-        },
-        {
-          "type": "version_directive",
-          "named": true
-        },
-        {
-          "type": "wildcard_constraints_directive",
-          "named": true
-        },
-        {
-          "type": "workdir_directive",
           "named": true
         }
       ]
@@ -2329,23 +2209,7 @@
           "named": true
         },
         {
-          "type": "config_directive",
-          "named": true
-        },
-        {
-          "type": "meta_wrapper_directive",
-          "named": true
-        },
-        {
-          "type": "prefix_directive",
-          "named": true
-        },
-        {
-          "type": "skip_validation_directive",
-          "named": true
-        },
-        {
-          "type": "snakefile_directive",
+          "type": "directive",
           "named": true
         },
         {
@@ -2439,86 +2303,6 @@
     }
   },
   {
-    "type": "notebook_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "onerror_directive",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "onstart_directive",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "onsuccess_directive",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "output_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "pair",
     "named": true,
     "fields": {
@@ -2557,22 +2341,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "params_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -2647,22 +2415,6 @@
     "fields": {}
   },
   {
-    "type": "prefix_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "print_statement",
     "named": true,
     "fields": {
@@ -2686,22 +2438,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "priority_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -2754,38 +2490,6 @@
     }
   },
   {
-    "type": "resources_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "retries_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "return_statement",
     "named": true,
     "fields": {},
@@ -2813,103 +2517,15 @@
       "required": true,
       "types": [
         {
-          "type": "benchmark_directive",
-          "named": true
-        },
-        {
-          "type": "cache_directive",
-          "named": true
-        },
-        {
           "type": "concatenated_string",
           "named": true
         },
         {
-          "type": "conda_directive",
-          "named": true
-        },
-        {
-          "type": "container_directive",
-          "named": true
-        },
-        {
-          "type": "cwl_directive",
-          "named": true
-        },
-        {
-          "type": "handover_directive",
-          "named": true
-        },
-        {
-          "type": "input_directive",
-          "named": true
-        },
-        {
-          "type": "log_directive",
-          "named": true
-        },
-        {
-          "type": "message_directive",
-          "named": true
-        },
-        {
-          "type": "notebook_directive",
-          "named": true
-        },
-        {
-          "type": "output_directive",
-          "named": true
-        },
-        {
-          "type": "params_directive",
-          "named": true
-        },
-        {
-          "type": "priority_directive",
-          "named": true
-        },
-        {
-          "type": "resources_directive",
-          "named": true
-        },
-        {
-          "type": "retries_directive",
-          "named": true
-        },
-        {
-          "type": "run_directive",
-          "named": true
-        },
-        {
-          "type": "script_directive",
-          "named": true
-        },
-        {
-          "type": "shadow_directive",
-          "named": true
-        },
-        {
-          "type": "shell_directive",
-          "named": true
-        },
-        {
-          "type": "singularity_directive",
+          "type": "directive",
           "named": true
         },
         {
           "type": "string",
-          "named": true
-        },
-        {
-          "type": "threads_directive",
-          "named": true
-        },
-        {
-          "type": "wildcard_constraints_directive",
-          "named": true
-        },
-        {
-          "type": "wrapper_directive",
           "named": true
         }
       ]
@@ -3034,38 +2650,6 @@
     }
   },
   {
-    "type": "run_directive",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "script_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "set",
     "named": true,
     "fields": {},
@@ -3123,70 +2707,6 @@
     }
   },
   {
-    "type": "shadow_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "shell_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "singularity_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "skip_validation_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "slice",
     "named": true,
     "fields": {},
@@ -3199,22 +2719,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "snakefile_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -3260,22 +2764,6 @@
         "types": [
           {
             "type": "primary_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "threads_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
             "named": true
           }
         ]
@@ -3482,22 +2970,6 @@
     }
   },
   {
-    "type": "version_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "while_statement",
     "named": true,
     "fields": {
@@ -3527,22 +2999,6 @@
         "types": [
           {
             "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "wildcard_constraints_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
             "named": true
           }
         ]
@@ -3609,38 +3065,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "workdir_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "wrapper_directive",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "directive_parameters",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {

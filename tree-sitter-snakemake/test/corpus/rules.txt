@@ -11,7 +11,7 @@ rule:
 (module
   (rule_definition
     (rule_body
-      (input_directive
+      (directive
         (directive_parameters
           (integer)
           (integer)
@@ -34,7 +34,7 @@ rule:
 (module
   (rule_definition
     (rule_body
-      (input_directive
+      (directive
         (directive_parameters
           (integer)
           (integer)
@@ -57,7 +57,7 @@ rule:
 (module
   (rule_definition
     (rule_body
-      (input_directive
+      (directive
         (directive_parameters
           (integer)
           (integer)
@@ -79,7 +79,7 @@ rule:
 (module
   (rule_definition
     (rule_body
-      (input_directive
+      (directive
        (directive_parameters
         (integer)
         (string)))
@@ -102,7 +102,7 @@ rule:
       (concatenated_string
         (string)
         (string))
-      (input_directive
+      (directive
        (directive_parameters
          (string))))))
 
@@ -147,80 +147,80 @@ rule all:
     name: (identifier)
     body: (rule_body
       (string)
-      (input_directive
+      (directive
         arguments: (directive_parameters
           (identifier)
           (identifier)))
-      (output_directive
+      (directive
         arguments: (directive_parameters
           (identifier)
           (identifier)))
-      (params_directive
+      (directive
         arguments: (directive_parameters
           (keyword_argument
             name: (identifier)
             value: (integer))))
-      (log_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (benchmark_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (cache_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (message_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (threads_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (resources_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (conda_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (container_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (singularity_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (run_directive
+      (directive
         body: (block
           (if_statement
             condition: (identifier)
             consequence: (block
               (pass_statement)))))
-      (shell_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (script_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (notebook_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (shadow_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (priority_directive
+      (directive
         arguments: (directive_parameters
           (integer)))
-      (retries_directive
+      (directive
         arguments: (directive_parameters
           (integer)))
-      (cwl_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (handover_directive
+      (directive
         arguments: (directive_parameters
           (true)))
-      (wrapper_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))
-      (wildcard_constraints_directive
+      (directive
         arguments: (directive_parameters
           (keyword_argument
             name: (identifier)
@@ -247,19 +247,19 @@ module a:
   (module_definition
     (identifier)
     (module_body
-      (snakefile_directive
+      (directive
         (directive_parameters
           (identifier)))
-      (meta_wrapper_directive
+      (directive
         (directive_parameters
           (identifier)))
-      (config_directive
+      (directive
         (directive_parameters
           (identifier)))
-      (skip_validation_directive
+      (directive
         (directive_parameters
           (true)))
-      (prefix_directive
+      (directive
         (directive_parameters
           (identifier)))
     )
@@ -283,7 +283,7 @@ use rule a from b as c with:
     name: (identifier)
     alias: (as_pattern_target)
     body: (rule_body
-      (output_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))))
   (rule_inheritance
@@ -291,7 +291,7 @@ use rule a from b as c with:
     module_name: (identifier)
     alias: (as_pattern_target)
     body: (rule_body
-      (output_directive
+      (directive
         arguments: (directive_parameters
           (identifier)))))
 )

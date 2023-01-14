@@ -10,6 +10,9 @@ module.exports = grammar(PYTHON, {
     ]),
 
     inline: ($, original) => original.concat([
+        $._simple_directive,
+        $._rule_directive,
+        $._module_directive,
         $.directive_parameters_identifiers
     ]),
 
@@ -25,7 +28,7 @@ module.exports = grammar(PYTHON, {
             $.rule_import
         ),
 
-        _simple_directive: $ => choice(
+        _simple_directive: $ => alias(choice(
             $.configfile_directive,
             $.container_directive,
             $.include_directive,
@@ -36,7 +39,7 @@ module.exports = grammar(PYTHON, {
             $.version_directive,
             $.wildcard_constraints_directive,
             $.workdir_directive
-        ),
+        ), $.directive),
 
         _compound_directive: $ => choice(
             $.rule_definition,
@@ -105,7 +108,7 @@ module.exports = grammar(PYTHON, {
             $._dedent
         ),
 
-        _rule_directive: $ => choice(
+        _rule_directive: $ => alias(choice(
             $.input_directive,
             $.output_directive,
             $.params_directive,
@@ -129,7 +132,7 @@ module.exports = grammar(PYTHON, {
             $.handover_directive,
             $.wrapper_directive,
             $.wildcard_constraints_directive
-        ),
+        ), $.directive),
 
         module_definition: $ => seq(
             "module",
@@ -150,13 +153,13 @@ module.exports = grammar(PYTHON, {
             $._dedent
         ),
 
-        _module_directive: $ => choice(
+        _module_directive: $ => alias(choice(
             $.config_directive,
             $.meta_wrapper_directive,
             $.prefix_directive,
             $.skip_validation_directive,
             $.snakefile_directive
-        ),
+        ), $.directive),
 
         // DIRECTIVES
 
@@ -267,7 +270,7 @@ function sep1(rule, separator) {
 
 function new_directive(name, body_name, parameters) {
     return seq(
-        name,
+        field("name", name),
         ":",
         field(body_name, parameters)
     )

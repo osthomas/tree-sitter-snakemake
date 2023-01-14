@@ -15,26 +15,26 @@ wildcard_constraints:
 -------------------------------------------------------------------------------
 
 (module
-  (configfile_directive
+  (directive
     (directive_parameters
       (identifier)))
-  (include_directive
+  (directive
     (directive_parameters
       (identifier)))
-  (workdir_directive
+  (directive
     (directive_parameters
       (identifier)))
-  (container_directive
+  (directive
     (directive_parameters
       (identifier)))
-  (localrules_directive
+  (directive
     (directive_parameters
       (identifier)))
-  (localrules_directive
+  (directive
     (directive_parameters
       (identifier)
       (identifier)))
-  (wildcard_constraints_directive
+  (directive
     (directive_parameters
       (keyword_argument
         (identifier)
@@ -56,13 +56,13 @@ onerror:
 -------------------------------------------------------------------------------
 
 (module
-  (onstart_directive
+  (directive
     (block
       (pass_statement)))
-  (onsuccess_directive
+  (directive
     (block
       (pass_statement)))
-  (onerror_directive
+  (directive
     (block
       (pass_statement)))
 )
