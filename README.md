@@ -12,7 +12,5 @@ of [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python).
 
 ## Todo
 
-* support snakemake's string interpolations
-* generalize directive definitions
 * add missing directives
-* Injections for [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+* Queries for [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
