@@ -1,5 +1,4 @@
 const PYTHON = require("tree-sitter-python/grammar")
-
 module.exports = grammar(PYTHON, {
     // For reference, see:
     // https://snakemake.readthedocs.io/en/stable/snakefiles/writing_snakefiles.html#grammar
@@ -8,6 +7,10 @@ module.exports = grammar(PYTHON, {
 
     conflicts: ($, original) => original.concat([
         [$._rule_import_list, $.rule_inheritance],
+    ]),
+
+    inline: ($, original) => original.concat([
+        $.directive_parameters_identifiers
     ]),
 
     rules: {
@@ -160,69 +163,69 @@ module.exports = grammar(PYTHON, {
         // Directives with parameters
 
         benchmark_directive: $ => new_directive("benchmark", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         cache_directive: $ => new_directive("cache", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         conda_directive: $ => new_directive("conda", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         config_directive: $ => new_directive("config", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         configfile_directive: $ => new_directive("configfile", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         container_directive: $ => new_directive("container", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         cwl_directive: $ => new_directive("cwl", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         handover_directive: $ => new_directive("handover", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         include_directive: $ => new_directive("include", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         input_directive: $ => new_directive("input", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         localrules_directive: $ => new_directive("localrules", "arguments",
-            alias($.directive_parameters_identifiers, $.directive_parameters)),
+            $.directive_parameters_identifiers),
         log_directive: $ => new_directive("log", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         message_directive: $ => new_directive("message", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         meta_wrapper_directive: $ => new_directive("meta_wrapper", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         notebook_directive: $ => new_directive("notebook", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         output_directive: $ => new_directive("output", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         params_directive: $ => new_directive("params", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         prefix_directive: $ => new_directive("prefix", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         priority_directive: $ => new_directive("priority", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         resources_directive: $ => new_directive("resources", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         retries_directive: $ => new_directive("retries", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         script_directive: $ => new_directive("script", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         shadow_directive: $ => new_directive("shadow", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         shell_directive: $ => new_directive("shell", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         singularity_directive: $ => new_directive("singularity", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         skip_validation_directive: $ => new_directive("skip_validation", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         snakefile_directive: $ => new_directive("snakefile", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         threads_directive: $ => new_directive("threads", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         version_directive: $ => new_directive("version", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         wildcard_constraints_directive: $ => new_directive("wildcard_constraints", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         workdir_directive: $ => new_directive("workdir", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
         wrapper_directive: $ => new_directive("wrapper", "arguments",
-            alias($.directive_parameters, $.directive_parameters)),
+            $.directive_parameters),
 
         // Directives with code blocks
 
@@ -235,7 +238,12 @@ module.exports = grammar(PYTHON, {
             $._directive_parameter
         )),
 
-        directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
+        _directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
+
+        directive_parameters_identifiers: $ => alias(
+            $._directive_parameters_identifiers,
+            $.directive_parameters
+        ),
 
         _directive_parameter: $ => choice(
             $.expression,

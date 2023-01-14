@@ -5838,13 +5838,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5864,13 +5859,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5890,13 +5880,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5916,13 +5901,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5942,13 +5922,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5968,13 +5943,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -5994,13 +5964,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6020,13 +5985,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6046,13 +6006,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6072,13 +6027,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6098,13 +6048,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters_identifiers"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters_identifiers"
           }
         }
       ]
@@ -6124,13 +6069,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6150,13 +6090,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6176,13 +6111,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6202,13 +6132,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6228,13 +6153,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6254,13 +6174,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6280,13 +6195,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6306,13 +6216,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6332,13 +6237,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6358,13 +6258,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6384,13 +6279,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6410,13 +6300,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6436,13 +6321,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6462,13 +6342,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6488,13 +6363,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6514,13 +6384,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6540,13 +6405,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6566,13 +6426,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6592,13 +6447,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6618,13 +6468,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6644,13 +6489,8 @@
           "type": "FIELD",
           "name": "arguments",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive_parameters"
-            },
-            "named": true,
-            "value": "directive_parameters"
+            "type": "SYMBOL",
+            "name": "directive_parameters"
           }
         }
       ]
@@ -6940,7 +6780,7 @@
         }
       ]
     },
-    "directive_parameters_identifiers": {
+    "_directive_parameters_identifiers": {
       "type": "CHOICE",
       "members": [
         {
@@ -7125,6 +6965,15 @@
         }
       ]
     },
+    "directive_parameters_identifiers": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_directive_parameters_identifiers"
+      },
+      "named": true,
+      "value": "directive_parameters"
+    },
     "_directive_parameter": {
       "type": "CHOICE",
       "members": [
@@ -7240,7 +7089,8 @@
     "_suite",
     "_expressions",
     "_left_hand_side",
-    "keyword_identifier"
+    "keyword_identifier",
+    "directive_parameters_identifiers"
   ],
   "supertypes": [
     "_simple_statement",
