@@ -26,6 +26,11 @@
     }
   },
   {
+    "type": "constraint",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
@@ -96,20 +101,11 @@
       "required": false,
       "types": [
         {
-          "type": "string_content",
-          "named": true
-        },
-        {
           "type": "wildcard",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "string_content",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "subscript",
@@ -144,16 +140,31 @@
   {
     "type": "wildcard",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
+    "fields": {
+      "constraint": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "constraint",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "primary_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -186,6 +197,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "{}",
     "named": false
   },
   {
