@@ -4,6 +4,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "checkpoint_definition",
+        "named": true
+      },
+      {
         "type": "class_definition",
         "named": true
       },
@@ -873,6 +877,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "checkpoint_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "rule_body",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3300,6 +3330,10 @@
   },
   {
     "type": "case",
+    "named": false
+  },
+  {
+    "type": "checkpoint",
     "named": false
   },
   {

@@ -334,3 +334,21 @@ use rule * from a as *_other
     module_name: (identifier)
     alias: (as_pattern_target))
 )
+
+
+===============================================================================
+Checkpoint definition
+===============================================================================
+
+checkpoint a:
+  output: "b"
+
+-------------------------------------------------------------------------------
+
+(module
+ (checkpoint_definition
+  (identifier)
+  (rule_body
+   (directive
+    (directive_parameters
+     (string))))))

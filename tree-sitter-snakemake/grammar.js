@@ -43,12 +43,22 @@ module.exports = grammar(PYTHON, {
 
         _compound_directive: $ => choice(
             $.rule_definition,
+            $.checkpoint_definition,
             $.rule_inheritance,
             $.module_definition
         ),
 
         rule_definition: $ => seq(
             "rule",
+            optional(
+                field('name', $.identifier)
+            ),
+            ":",
+            field('body', $.rule_body)
+        ),
+
+        checkpoint_definition: $ => seq(
+            "checkpoint",
             optional(
                 field('name', $.identifier)
             ),
