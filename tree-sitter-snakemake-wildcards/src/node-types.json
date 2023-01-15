@@ -18,7 +18,19 @@
         "required": true,
         "types": [
           {
-            "type": "primary_expression",
+            "type": "attribute",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "subscript",
             "named": true
           }
         ]
@@ -32,26 +44,6 @@
   },
   {
     "type": "expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "primary_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "integer",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "primary_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -76,6 +68,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "integer",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "slice",
@@ -130,7 +127,19 @@
         "required": true,
         "types": [
           {
-            "type": "primary_expression",
+            "type": "attribute",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "subscript",
             "named": true
           }
         ]
@@ -156,11 +165,19 @@
         "required": true,
         "types": [
           {
+            "type": "attribute",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "primary_expression",
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "subscript",
             "named": true
           }
         ]

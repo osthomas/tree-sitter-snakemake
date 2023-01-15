@@ -9,7 +9,11 @@ module.exports = grammar({
     word: $ => $.identifier,
 
     conflicts: $ => [
-        [$._wildcard_definition, $.primary_expression]
+        [$._wildcard_definition, $._wildcard_interpolation]
+    ],
+
+    inline: $ => [
+        $.primary_expression
     ],
 
     rules: {

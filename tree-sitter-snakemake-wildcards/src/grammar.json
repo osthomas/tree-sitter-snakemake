@@ -519,7 +519,7 @@
   "conflicts": [
     [
       "_wildcard_definition",
-      "primary_expression"
+      "_wildcard_interpolation"
     ]
   ],
   "precedences": [],
@@ -529,7 +529,9 @@
       "name": "_STRING_CONTENT"
     }
   ],
-  "inline": [],
+  "inline": [
+    "primary_expression"
+  ],
   "supertypes": []
 }
 
