@@ -1,4 +1,7 @@
 node_modules
+bindings
+binding.gyp
+Cargo.toml
 package-lock.json
 build
 log*
