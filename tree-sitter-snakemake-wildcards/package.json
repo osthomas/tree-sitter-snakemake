@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "tree-sitter-cli": "^0.20.7"
-  },
-  "main": "bindings/node"
-}
