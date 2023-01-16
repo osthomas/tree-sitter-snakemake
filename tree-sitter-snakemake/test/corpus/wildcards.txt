@@ -1,0 +1,56 @@
+===============================================================================
+Wildcards (Definition)
+===============================================================================
+
+rule a:
+  input:
+    "a"
+    "{a}"
+    "{a,x\d+}"
+    "{a,x\d{3}}{b}"
+    "{a}{b}"
+    "{{a}{b}"
+    "{{a}{b}}"
+    "{{a}{b}}{"
+    "{{a}{b}}{{"
+    "{{a}{b}}{{}}"
+    f"{a}"
+
+-------------------------------------------------------------------------------
+
+(module (rule_definition (identifier) (rule_body (directive (directive_parameters (concatenated_string
+  (string)
+  (string (wildcard (identifier)))
+  (string (wildcard (identifier) (constraint)))
+  (string (wildcard (identifier) (constraint)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (interpolation (identifier)))
+))))))
+
+
+===============================================================================
+Wildcards (Interpolation)
+===============================================================================
+
+rule a:
+  shell:
+    "a"
+    "{a}"
+    "{a}{b}"
+    "{{a}}{b}{{}}"
+    f"{a}"
+
+-------------------------------------------------------------------------------
+
+(module (rule_definition (identifier) (rule_body (directive (directive_parameters (concatenated_string
+  (string)
+  (string (wildcard (identifier)))
+  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (wildcard (identifier)))
+  (string (interpolation (identifier)))
+))))))

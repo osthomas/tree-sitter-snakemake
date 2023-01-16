@@ -21,6 +21,11 @@ enum TokenType {
   CLOSE_PAREN,
   CLOSE_BRACKET,
   CLOSE_BRACE,
+  ALLOW_WC_DEF,
+  ALLOW_WC_INTERP,
+  DISALLOW_WC,
+  WILDCARD_DEF_OPEN,
+  WILDCARD_INTERP_OPEN,
 };
 
 struct Delimiter {
@@ -95,6 +100,12 @@ struct Delimiter {
 };
 
 struct Scanner {
+  enum AllowWildcard {
+    none,
+    definition,
+    interpolation
+  };
+
   Scanner() {
     assert(sizeof(Delimiter) == sizeof(char));
     deserialize(NULL, 0);
@@ -102,6 +113,7 @@ struct Scanner {
 
   unsigned serialize(char *buffer) {
     size_t i = 0;
+    buffer[i++] = allow_wc;
 
     size_t delimiter_count = delimiter_stack.size();
     if (delimiter_count > UINT8_MAX) delimiter_count = UINT8_MAX;
@@ -130,6 +142,7 @@ struct Scanner {
 
     if (length > 0) {
       size_t i = 0;
+      allow_wc = (AllowWildcard)buffer[i++];
 
       size_t delimiter_count = (uint8_t)buffer[i++];
       delimiter_stack.resize(delimiter_count);
@@ -152,19 +165,147 @@ struct Scanner {
     lexer->advance(lexer, true);
   }
 
+  // Parse a format string, no wildcards allowed.
+  bool parse_format(
+      TSLexer *lexer,
+      const bool *valid_symbols,
+      const bool has_content) {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = STRING_CONTENT;
+    return has_content;
+  }
+
+  bool parse_wc_interp_open(
+      TSLexer *lexer,
+      const bool *valid_symbols,
+      const bool has_content) {
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '{') {
+      // Double {{ -> escaped. Emit string content up to {, then
+      // disallow wildcards so the escape sequence can be recognized.
+      if (has_content) {
+        lexer->result_symbol = STRING_CONTENT;
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (has_content) {
+        lexer->result_symbol = STRING_CONTENT;
+        return true;
+      } else {
+        lexer->result_symbol = WILDCARD_INTERP_OPEN;
+        return true;
+      }
+    }
+  }
+
+  // Closing bracket for wildcard interpolation
+  bool parse_wc_interp_close(
+      TSLexer *lexer,
+      const bool *valid_symbols,
+      const bool has_content) {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = STRING_CONTENT;
+    return has_content;
+  }
+
+  // Opening bracket for wildcard definition
+  bool parse_wc_def_open(
+      TSLexer *lexer,
+      const bool *valid_symbols,
+      bool has_content,
+      int32_t end_character) {
+    // No format string, wildcards allowed
+    bool wildcard_open_valid = valid_symbols[WILDCARD_DEF_OPEN] || valid_symbols[WILDCARD_INTERP_OPEN];
+    // Consume additional { - only the last one opens a wildcard.
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    while (lexer->lookahead == '{' && lexer->lookahead != end_character) {
+      lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
+      has_content = true;
+    }
+    if (has_content) {
+      lexer->result_symbol = STRING_CONTENT;
+      return true;
+    } else {
+      // Found an opening bracket
+      if (wildcard_open_valid) {
+        // String ends before closing bracket -> not a wildcard
+        if (lexer->lookahead == end_character) {
+          lexer->mark_end(lexer);
+          lexer->result_symbol = STRING_CONTENT;
+          return true;
+        }
+        // Empty brackets -> not a wildcard
+        if (lexer->lookahead == '}') {
+          lexer->advance(lexer, false);
+          lexer->mark_end(lexer);
+          lexer->result_symbol = STRING_CONTENT;
+          return true;
+        }
+        // Check if the bracket is closed somewhere. If not -> not a wildcard
+        while (lexer->lookahead != end_character && !lexer->eof(lexer)) {
+          lexer->advance(lexer, false);
+          if (lexer->lookahead == '}') {
+            lexer->result_symbol = WILDCARD_DEF_OPEN;
+            return true;
+          }
+        }
+        // No closing bracket found
+        lexer->result_symbol = STRING_CONTENT;
+        lexer->mark_end(lexer);
+      } else {
+        lexer->result_symbol = STRING_CONTENT;
+        lexer->advance(lexer, false);
+      }
+    }
+    return true;
+  }
+
+
   bool scan(TSLexer *lexer, const bool *valid_symbols) {
     bool error_recovery_mode = valid_symbols[STRING_CONTENT] && valid_symbols[INDENT];
     bool within_brackets = valid_symbols[CLOSE_BRACE] || valid_symbols[CLOSE_PAREN] || valid_symbols[CLOSE_BRACKET];
+
+    // Set flag if and which wildcards are allowed. This affects handling of
+    // strings.
+    if (valid_symbols[ALLOW_WC_DEF] && !error_recovery_mode) {
+      allow_wc = definition;
+      lexer->result_symbol = ALLOW_WC_DEF;
+      return true;
+    }
+    if (valid_symbols[ALLOW_WC_INTERP] && !error_recovery_mode) {
+      allow_wc = interpolation;
+      lexer->result_symbol = ALLOW_WC_INTERP;
+      return true;
+    }
+    if (valid_symbols[DISALLOW_WC] && !error_recovery_mode) {
+      allow_wc = none;
+      lexer->result_symbol = DISALLOW_WC;
+      return true;
+    }
 
     if (valid_symbols[STRING_CONTENT] && !delimiter_stack.empty() && !error_recovery_mode) {
       Delimiter delimiter = delimiter_stack.back();
       int32_t end_character = delimiter.end_character();
       bool has_content = false;
       while (lexer->lookahead) {
-        if ((lexer->lookahead == '{' || lexer->lookahead == '}') && delimiter.is_format()) {
-          lexer->mark_end(lexer);
-          lexer->result_symbol = STRING_CONTENT;
-          return has_content;
+        if ((lexer->lookahead == '{' || lexer->lookahead == '}')) {
+          // How brackets are handled depends on two factors:
+          // 1. Are we in a format string?
+          // 2. Are wildcards allowed?
+          if (delimiter.is_format()) {
+            return parse_format(lexer, valid_symbols, has_content);
+          } else if (allow_wc == interpolation && lexer->lookahead == '{') {
+            return parse_wc_interp_open(lexer, valid_symbols, has_content);
+          } else if (allow_wc == interpolation && lexer->lookahead == '}') {
+            return parse_wc_interp_close(lexer, valid_symbols, has_content);
+          } else if (allow_wc == definition && lexer->lookahead == '{') {
+            return parse_wc_def_open(lexer, valid_symbols, has_content, end_character);
+          }
         } else if (lexer->lookahead == '\\') {
           if (delimiter.is_raw()) {
             lexer->advance(lexer, false);
@@ -374,6 +515,7 @@ struct Scanner {
 
   vector<uint16_t> indent_length_stack;
   vector<Delimiter> delimiter_stack;
+  AllowWildcard allow_wc = none;
 };
 
 }

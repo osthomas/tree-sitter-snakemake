@@ -2766,6 +2766,10 @@
         {
           "type": "interpolation",
           "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
         }
       ]
     }
@@ -3036,6 +3040,33 @@
     }
   },
   {
+    "type": "wildcard",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "subscript",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "wildcard_import",
     "named": true,
     "fields": {}
@@ -3118,10 +3149,6 @@
   },
   {
     "type": "!=",
-    "named": false
-  },
-  {
-    "type": "\"",
     "named": false
   },
   {
@@ -3355,6 +3382,10 @@
   {
     "type": "configfile",
     "named": false
+  },
+  {
+    "type": "constraint",
+    "named": true
   },
   {
     "type": "container",
