@@ -1287,6 +1287,18 @@
             "named": false
           },
           {
+            "type": "default_target",
+            "named": false
+          },
+          {
+            "type": "envmodules",
+            "named": false
+          },
+          {
+            "type": "envvars",
+            "named": false
+          },
+          {
             "type": "handover",
             "named": false
           },
@@ -1339,6 +1351,14 @@
             "named": false
           },
           {
+            "type": "pepfile",
+            "named": false
+          },
+          {
+            "type": "pepschema",
+            "named": false
+          },
+          {
             "type": "prefix",
             "named": false
           },
@@ -1355,7 +1375,15 @@
             "named": false
           },
           {
+            "type": "ruleorder",
+            "named": false
+          },
+          {
             "type": "run",
+            "named": false
+          },
+          {
+            "type": "scattergather",
             "named": false
           },
           {
@@ -1380,6 +1408,10 @@
           },
           {
             "type": "snakefile",
+            "named": false
+          },
+          {
+            "type": "template_engine",
             "named": false
           },
           {
@@ -3404,6 +3436,10 @@
     "named": false
   },
   {
+    "type": "default_target",
+    "named": false
+  },
+  {
     "type": "del",
     "named": false
   },
@@ -3417,6 +3453,14 @@
   },
   {
     "type": "else",
+    "named": false
+  },
+  {
+    "type": "envmodules",
+    "named": false
+  },
+  {
+    "type": "envvars",
     "named": false
   },
   {
@@ -3568,6 +3612,14 @@
     "named": false
   },
   {
+    "type": "pepfile",
+    "named": false
+  },
+  {
+    "type": "pepschema",
+    "named": false
+  },
+  {
     "type": "prefix",
     "named": false
   },
@@ -3600,7 +3652,15 @@
     "named": false
   },
   {
+    "type": "ruleorder",
+    "named": false
+  },
+  {
     "type": "run",
+    "named": false
+  },
+  {
+    "type": "scattergather",
     "named": false
   },
   {
@@ -3625,6 +3685,10 @@
   },
   {
     "type": "snakefile",
+    "named": false
+  },
+  {
+    "type": "template_engine",
     "named": false
   },
   {

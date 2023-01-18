@@ -139,6 +139,10 @@ rule all:
   wrapper: a
   wildcard_constraints:
     a = "x"
+  template_engine:
+    "jinja2"
+  default_target: True
+  envmodules: "a"
 
 -------------------------------------------------------------------------------
 
@@ -225,6 +229,15 @@ rule all:
           (keyword_argument
             name: (identifier)
             value: (string))))
+      (directive
+        arguments: (directive_parameters
+          (string)))
+      (directive
+        arguments: (directive_parameters
+          (true)))
+      (directive
+        arguments: (directive_parameters
+          (string)))
     )
   )
 )

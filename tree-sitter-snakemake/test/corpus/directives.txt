@@ -11,6 +11,15 @@ localrules: a
 localrules: a, b
 wildcard_constraints:
     a = "\d+"
+ruleorder: a
+ruleorder: a > b
+scattergather:
+    a = 1,
+    b = 2
+pepfile: "a"
+pepschema:
+  "b"
+envvars: "ABC", "DEF"
 
 -------------------------------------------------------------------------------
 
@@ -39,6 +48,31 @@ wildcard_constraints:
       (keyword_argument
         (identifier)
         (string))))
+  (directive
+    (directive_parameters
+      (identifier)))
+  (directive
+    (directive_parameters
+      (identifier)
+      (identifier)))
+  (directive
+    (directive_parameters
+      (keyword_argument
+        (identifier)
+        (integer))
+      (keyword_argument
+        (identifier)
+        (integer))))
+  (directive
+    (directive_parameters
+      (string)))
+  (directive
+    (directive_parameters
+      (string)))
+  (directive
+    (directive_parameters
+      (string)
+      (string)))
 )
 
 

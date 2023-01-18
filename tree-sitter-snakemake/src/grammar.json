@@ -5286,6 +5286,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "envvars_directive"
+          },
+          {
+            "type": "SYMBOL",
             "name": "include_directive"
           },
           {
@@ -5303,6 +5307,22 @@
           {
             "type": "SYMBOL",
             "name": "onsuccess_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pepfile_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pepschema_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "ruleorder_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "scattergather_directive"
           },
           {
             "type": "SYMBOL",
@@ -5706,6 +5726,14 @@
           },
           {
             "type": "SYMBOL",
+            "name": "default_target_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "envmodules_directive"
+          },
+          {
+            "type": "SYMBOL",
             "name": "message_directive"
           },
           {
@@ -5771,6 +5799,10 @@
           {
             "type": "SYMBOL",
             "name": "wildcard_constraints_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "template_engine_directive"
           }
         ]
       },
@@ -6048,6 +6080,81 @@
         }
       ]
     },
+    "default_target_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "default_target"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
+    "envvars_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "envvars"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
+    "envmodules_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "envmodules"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
     "handover_directive": {
       "type": "SEQ",
       "members": [
@@ -6298,6 +6405,56 @@
         }
       ]
     },
+    "pepfile_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "pepfile"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
+    "pepschema_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "pepschema"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
     "prefix_directive": {
       "type": "SEQ",
       "members": [
@@ -6394,6 +6551,31 @@
           "content": {
             "type": "SYMBOL",
             "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
+    "ruleorder_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "ruleorder"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_ruleorder"
           }
         }
       ]
@@ -6523,6 +6705,31 @@
         }
       ]
     },
+    "scattergather_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "scattergather"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
     "snakefile_directive": {
       "type": "SEQ",
       "members": [
@@ -6532,6 +6739,31 @@
           "content": {
             "type": "STRING",
             "value": "snakefile"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "arguments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_directive_parameters_wc_def"
+          }
+        }
+      ]
+    },
+    "template_engine_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "STRING",
+            "value": "template_engine"
           }
         },
         {
@@ -7329,6 +7561,48 @@
       "content": {
         "type": "SYMBOL",
         "name": "__directive_parameters_identifiers"
+      },
+      "named": true,
+      "value": "directive_parameters"
+    },
+    "__directive_parameters_ruleorder": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ">"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_directive_parameters_ruleorder": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "__directive_parameters_ruleorder"
       },
       "named": true,
       "value": "directive_parameters"

@@ -39,11 +39,16 @@ module.exports = grammar(PYTHON, {
         _simple_directive: $ => alias(choice(
             $.configfile_directive,
             $.container_directive,
+            $.envvars_directive,
             $.include_directive,
             $.localrules_directive,
             $.onerror_directive,
             $.onstart_directive,
             $.onsuccess_directive,
+            $.pepfile_directive,
+            $.pepschema_directive,
+            $.ruleorder_directive,
+            $.scattergather_directive,
             $.version_directive,
             $.wildcard_constraints_directive,
             $.workdir_directive
@@ -133,6 +138,8 @@ module.exports = grammar(PYTHON, {
             $.log_directive,
             $.benchmark_directive,
             $.cache_directive,
+            $.default_target_directive,
+            $.envmodules_directive,
             $.message_directive,
             $.threads_directive,
             $.resources_directive,
@@ -149,7 +156,8 @@ module.exports = grammar(PYTHON, {
             $.cwl_directive,
             $.handover_directive,
             $.wrapper_directive,
-            $.wildcard_constraints_directive
+            $.wildcard_constraints_directive,
+            $.template_engine_directive
         ), $.directive),
 
         module_definition: $ => seq(
@@ -197,6 +205,12 @@ module.exports = grammar(PYTHON, {
             $._directive_parameters_wc_def),
         cwl_directive: $ => new_directive("cwl", "arguments",
             $._directive_parameters_wc_def),
+        default_target_directive: $ => new_directive("default_target", "arguments",
+            $._directive_parameters_wc_def),
+        envvars_directive: $ => new_directive("envvars", "arguments",
+            $._directive_parameters_wc_def),
+        envmodules_directive: $ => new_directive("envmodules", "arguments",
+            $._directive_parameters_wc_def),
         handover_directive: $ => new_directive("handover", "arguments",
             $._directive_parameters_wc_def),
         include_directive: $ => new_directive("include", "arguments",
@@ -217,6 +231,10 @@ module.exports = grammar(PYTHON, {
             $._directive_parameters_wc_def),
         params_directive: $ => new_directive("params", "arguments",
             $._directive_parameters_wc_def),
+        pepfile_directive: $ => new_directive("pepfile", "arguments",
+            $._directive_parameters_wc_def),
+        pepschema_directive: $ => new_directive("pepschema", "arguments",
+            $._directive_parameters_wc_def),
         prefix_directive: $ => new_directive("prefix", "arguments",
             $._directive_parameters_wc_def),
         priority_directive: $ => new_directive("priority", "arguments",
@@ -225,6 +243,8 @@ module.exports = grammar(PYTHON, {
             $._directive_parameters_wc_def),
         retries_directive: $ => new_directive("retries", "arguments",
             $._directive_parameters_wc_def),
+        ruleorder_directive: $ => new_directive("ruleorder", "arguments",
+            $._directive_parameters_ruleorder),
         script_directive: $ => new_directive("script", "arguments",
             $._directive_parameters_wc_def),
         shadow_directive: $ => new_directive("shadow", "arguments",
@@ -235,7 +255,11 @@ module.exports = grammar(PYTHON, {
             $._directive_parameters_wc_def),
         skip_validation_directive: $ => new_directive("skip_validation", "arguments",
             $._directive_parameters_wc_def),
+        scattergather_directive: $ => new_directive("scattergather", "arguments",
+            $._directive_parameters_wc_def),
         snakefile_directive: $ => new_directive("snakefile", "arguments",
+            $._directive_parameters_wc_def),
+        template_engine_directive: $ => new_directive("template_engine", "arguments",
             $._directive_parameters_wc_def),
         threads_directive: $ => new_directive("threads", "arguments",
             $._directive_parameters_wc_def),
@@ -283,6 +307,16 @@ module.exports = grammar(PYTHON, {
         __directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
         _directive_parameters_identifiers: $ => alias(
             $.__directive_parameters_identifiers,
+            $.directive_parameters
+        ),
+
+        // Identifier comparisons (for ruleorder)
+        __directive_parameters_ruleorder: $ => seq(
+            $.identifier,
+            optional(repeat1(seq(">", $.identifier)))
+        ),
+        _directive_parameters_ruleorder: $ => alias(
+            $.__directive_parameters_ruleorder,
             $.directive_parameters
         ),
 
