@@ -5893,7 +5893,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -5918,7 +5918,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -5943,7 +5943,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -5968,7 +5968,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -5993,7 +5993,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6018,7 +6018,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6043,7 +6043,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6068,7 +6068,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6093,7 +6093,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6118,7 +6118,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6143,7 +6143,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_identifiers"
+            "name": "_directive_parameters_identifiers"
           }
         }
       ]
@@ -6168,7 +6168,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6193,7 +6193,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6218,7 +6218,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6243,7 +6243,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6268,7 +6268,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6293,7 +6293,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6318,7 +6318,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6343,7 +6343,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6368,7 +6368,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6393,7 +6393,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6418,7 +6418,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6443,7 +6443,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6468,7 +6468,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_interp"
+            "name": "_directive_parameters_wc_interp"
           }
         }
       ]
@@ -6493,7 +6493,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6518,7 +6518,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6543,7 +6543,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6568,7 +6568,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6593,7 +6593,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6618,7 +6618,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6643,7 +6643,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6668,7 +6668,7 @@
           "name": "arguments",
           "content": {
             "type": "SYMBOL",
-            "name": "directive_parameters_wc_def"
+            "name": "_directive_parameters_wc_def"
           }
         }
       ]
@@ -6773,7 +6773,7 @@
         }
       ]
     },
-    "_directive_parameters_wc_def": {
+    "__directive_parameters_wc_def": {
       "type": "SEQ",
       "members": [
         {
@@ -6947,16 +6947,16 @@
         }
       ]
     },
-    "directive_parameters_wc_def": {
+    "_directive_parameters_wc_def": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
-        "name": "_directive_parameters_wc_def"
+        "name": "__directive_parameters_wc_def"
       },
       "named": true,
       "value": "directive_parameters"
     },
-    "_directive_parameters_wc_interp": {
+    "__directive_parameters_wc_interp": {
       "type": "SEQ",
       "members": [
         {
@@ -7130,16 +7130,16 @@
         }
       ]
     },
-    "directive_parameters_wc_interp": {
+    "_directive_parameters_wc_interp": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
-        "name": "_directive_parameters_wc_interp"
+        "name": "__directive_parameters_wc_interp"
       },
       "named": true,
       "value": "directive_parameters"
     },
-    "_directive_parameters_identifiers": {
+    "__directive_parameters_identifiers": {
       "type": "CHOICE",
       "members": [
         {
@@ -7324,11 +7324,11 @@
         }
       ]
     },
-    "directive_parameters_identifiers": {
+    "_directive_parameters_identifiers": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
-        "name": "_directive_parameters_identifiers"
+        "name": "__directive_parameters_identifiers"
       },
       "named": true,
       "value": "directive_parameters"
@@ -7564,10 +7564,7 @@
     "keyword_identifier",
     "_simple_directive",
     "_rule_directive",
-    "_module_directive",
-    "directive_parameters_wc_def",
-    "directive_parameters_wc_interp",
-    "directive_parameters_identifiers"
+    "_module_directive"
   ],
   "supertypes": [
     "_simple_statement",

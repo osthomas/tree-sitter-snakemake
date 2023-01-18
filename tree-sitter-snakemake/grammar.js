@@ -22,9 +22,6 @@ module.exports = grammar(PYTHON, {
         $._simple_directive,
         $._rule_directive,
         $._module_directive,
-        $.directive_parameters_wc_def,
-        $.directive_parameters_wc_interp,
-        $.directive_parameters_identifiers
     ]),
 
     rules: {
@@ -187,69 +184,69 @@ module.exports = grammar(PYTHON, {
         // Directives with parameters
 
         benchmark_directive: $ => new_directive("benchmark", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         cache_directive: $ => new_directive("cache", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         conda_directive: $ => new_directive("conda", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         config_directive: $ => new_directive("config", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         configfile_directive: $ => new_directive("configfile", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         container_directive: $ => new_directive("container", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         cwl_directive: $ => new_directive("cwl", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         handover_directive: $ => new_directive("handover", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         include_directive: $ => new_directive("include", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         input_directive: $ => new_directive("input", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         localrules_directive: $ => new_directive("localrules", "arguments",
-            $.directive_parameters_identifiers),
+            $._directive_parameters_identifiers),
         log_directive: $ => new_directive("log", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         message_directive: $ => new_directive("message", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         meta_wrapper_directive: $ => new_directive("meta_wrapper", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         notebook_directive: $ => new_directive("notebook", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         output_directive: $ => new_directive("output", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         params_directive: $ => new_directive("params", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         prefix_directive: $ => new_directive("prefix", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         priority_directive: $ => new_directive("priority", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         resources_directive: $ => new_directive("resources", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         retries_directive: $ => new_directive("retries", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         script_directive: $ => new_directive("script", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         shadow_directive: $ => new_directive("shadow", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         shell_directive: $ => new_directive("shell", "arguments",
-            $.directive_parameters_wc_interp),
+            $._directive_parameters_wc_interp),
         singularity_directive: $ => new_directive("singularity", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         skip_validation_directive: $ => new_directive("skip_validation", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         snakefile_directive: $ => new_directive("snakefile", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         threads_directive: $ => new_directive("threads", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         version_directive: $ => new_directive("version", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         wildcard_constraints_directive: $ => new_directive("wildcard_constraints", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         workdir_directive: $ => new_directive("workdir", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
         wrapper_directive: $ => new_directive("wrapper", "arguments",
-            $.directive_parameters_wc_def),
+            $._directive_parameters_wc_def),
 
         // Directives with code blocks
 
@@ -261,31 +258,31 @@ module.exports = grammar(PYTHON, {
         // DIRECTIVE PARAMETERS
 
         // Parameters for directives which allow *definition* of wildcards
-        _directive_parameters_wc_def: $ => seq(
+        __directive_parameters_wc_def: $ => seq(
             $._ALLOW_WC_DEF,
             directive_parameters($, $._directive_parameter),
             $._DISALLOW_WC
         ),
-        directive_parameters_wc_def: $ => alias(
-            $._directive_parameters_wc_def,
+        _directive_parameters_wc_def: $ => alias(
+            $.__directive_parameters_wc_def,
             $.directive_parameters
         ),
 
         // Parameters for directives which allow *interpolation* of wildcards
-        _directive_parameters_wc_interp: $ => seq(
+        __directive_parameters_wc_interp: $ => seq(
             $._ALLOW_WC_INTERP,
             directive_parameters($, $._directive_parameter),
             $._DISALLOW_WC
         ),
-        directive_parameters_wc_interp: $ => alias(
-            $._directive_parameters_wc_interp,
+        _directive_parameters_wc_interp: $ => alias(
+            $.__directive_parameters_wc_interp,
             $.directive_parameters
         ),
 
         // Identifier list (for localrules)
-        _directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
-        directive_parameters_identifiers: $ => alias(
-            $._directive_parameters_identifiers,
+        __directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
+        _directive_parameters_identifiers: $ => alias(
+            $.__directive_parameters_identifiers,
             $.directive_parameters
         ),
 
