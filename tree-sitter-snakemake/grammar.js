@@ -310,7 +310,7 @@ module.exports = grammar(PYTHON, {
 
         // STRINGS
         string: $ => seq(
-            $._string_start,
+            alias($._string_start, '"'),
             repeat(choice(
                 $.interpolation,
                 $._escape_interpolation,
@@ -319,7 +319,7 @@ module.exports = grammar(PYTHON, {
                 $.wildcard,
                 $._string_content,
             )),
-            $._string_end
+            alias($._string_end, '"')
         ),
 
         // The WILDCARD_DEF_OPEN and WILDCARD_INTERP_OPEN tokens are emitted by
