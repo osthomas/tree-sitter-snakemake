@@ -37,22 +37,43 @@ module.exports = grammar(PYTHON, {
         ),
 
         _simple_directive: $ => alias(choice(
-            $.configfile_directive,
-            $.container_directive,
-            $.envvars_directive,
-            $.include_directive,
+            $._simple_directive_wc_none,
+            $._simple_directive_block,
             $.localrules_directive,
-            $.onerror_directive,
-            $.onstart_directive,
-            $.onsuccess_directive,
-            $.pepfile_directive,
-            $.pepschema_directive,
-            $.ruleorder_directive,
-            $.scattergather_directive,
-            $.version_directive,
-            $.wildcard_constraints_directive,
-            $.workdir_directive
+            $.ruleorder_directive
         ), $.directive),
+
+        _simple_directive_wc_none: $ => new_directive(
+            choice(
+                "configfile",
+                "container",
+                "envvars",
+                "include",
+                "pepfile",
+                "pepschema",
+                "scattergather",
+                "version",
+                "wildcard_constraints",
+                "workdir"
+            ),
+            "arguments",
+            $._directive_parameters_wc_none
+        ),
+
+        _simple_directive_block: $ => new_directive(
+            choice(
+                "onerror",
+                "onstart",
+                "onsuccess"
+            ),
+            "body",
+            $._suite
+        ),
+
+        localrules_directive: $ => new_directive("localrules", "arguments",
+            $._directive_parameters_identifiers),
+        ruleorder_directive: $ => new_directive("ruleorder", "arguments",
+            $._directive_parameters_ruleorder),
 
         _compound_directive: $ => choice(
             $.rule_definition,
@@ -131,34 +152,69 @@ module.exports = grammar(PYTHON, {
             $._dedent
         ),
 
+        // Directives which can appear in rule definitions
         _rule_directive: $ => alias(choice(
-            $.input_directive,
-            $.output_directive,
-            $.params_directive,
-            $.log_directive,
-            $.benchmark_directive,
-            $.cache_directive,
-            $.default_target_directive,
-            $.envmodules_directive,
-            $.message_directive,
-            $.threads_directive,
-            $.resources_directive,
-            $.conda_directive,
-            $.container_directive,
-            $.singularity_directive,
-            $.run_directive,
-            $.shell_directive,
-            $.script_directive,
-            $.notebook_directive,
-            $.shadow_directive,
-            $.priority_directive,
-            $.retries_directive,
-            $.cwl_directive,
-            $.handover_directive,
-            $.wrapper_directive,
-            $.wildcard_constraints_directive,
-            $.template_engine_directive
+            $._rule_directive_wc_def,
+            $._rule_directive_wc_interp,
+            $._rule_directive_wc_none,
+            $._rule_directive_block
         ), $.directive),
+
+        // Rule directives with wildcard definitions
+        _rule_directive_wc_def: $ => new_directive(
+            choice(
+                "benchmark",
+                "input",
+                "log",
+                "output"
+            ),
+            "arguments",
+            $._directive_parameters_wc_def
+        ),
+
+        // Rule directives with wildcard interpolations
+        _rule_directive_wc_interp: $ => new_directive(
+            choice(
+                "message",
+                "notebook",
+                "script",
+                "shell"
+            ),
+            "arguments",
+            $._directive_parameters_wc_interp
+        ),
+
+        // Rule directives without wildcards
+        _rule_directive_wc_none: $ => new_directive(
+            choice(
+                "cache",
+                "conda",
+                "container",
+                "cwl",
+                "default_target",
+                "envmodules",
+                "handover",
+                "params",
+                "priority",
+                "resources",
+                "retries",
+                "shadow",
+                "singularity",
+                "template_engine",
+                "threads",
+                "wildcard_constraints",
+                "wrapper"
+            ),
+            "arguments",
+            $._directive_parameters_wc_none
+        ),
+
+        // Rule directives with code blocks
+        _rule_directive_block: $ => new_directive(
+            "run",
+            "body",
+            $._suite
+        ),
 
         module_definition: $ => seq(
             "module",
@@ -180,104 +236,22 @@ module.exports = grammar(PYTHON, {
         ),
 
         _module_directive: $ => alias(choice(
-            $.config_directive,
-            $.meta_wrapper_directive,
-            $.prefix_directive,
-            $.skip_validation_directive,
-            $.snakefile_directive
+            $._module_directive_wc_none,
         ), $.directive),
 
-        // DIRECTIVES
+        // Module directives without wildcards
+        _module_directive_wc_none: $ => new_directive(
+            choice(
+                "config",
+                "meta_wrapper",
+                "prefix",
+                "skip_validation",
+                "snakefile"
+            ),
+            "arguments",
+            $._directive_parameters_wc_none
+        ),
 
-        // Directives with parameters
-
-        benchmark_directive: $ => new_directive("benchmark", "arguments",
-            $._directive_parameters_wc_def),
-        cache_directive: $ => new_directive("cache", "arguments",
-            $._directive_parameters_wc_none),
-        conda_directive: $ => new_directive("conda", "arguments",
-            $._directive_parameters_wc_none),
-        config_directive: $ => new_directive("config", "arguments",
-            $._directive_parameters_wc_none),
-        configfile_directive: $ => new_directive("configfile", "arguments",
-            $._directive_parameters_wc_none),
-        container_directive: $ => new_directive("container", "arguments",
-            $._directive_parameters_wc_none),
-        cwl_directive: $ => new_directive("cwl", "arguments",
-            $._directive_parameters_wc_none),
-        default_target_directive: $ => new_directive("default_target", "arguments",
-            $._directive_parameters_wc_none),
-        envvars_directive: $ => new_directive("envvars", "arguments",
-            $._directive_parameters_wc_none),
-        envmodules_directive: $ => new_directive("envmodules", "arguments",
-            $._directive_parameters_wc_none),
-        handover_directive: $ => new_directive("handover", "arguments",
-            $._directive_parameters_wc_none),
-        include_directive: $ => new_directive("include", "arguments",
-            $._directive_parameters_wc_none),
-        input_directive: $ => new_directive("input", "arguments",
-            $._directive_parameters_wc_def),
-        localrules_directive: $ => new_directive("localrules", "arguments",
-            $._directive_parameters_identifiers),
-        log_directive: $ => new_directive("log", "arguments",
-            $._directive_parameters_wc_def),
-        message_directive: $ => new_directive("message", "arguments",
-            $._directive_parameters_wc_interp),
-        meta_wrapper_directive: $ => new_directive("meta_wrapper", "arguments",
-            $._directive_parameters_wc_none),
-        notebook_directive: $ => new_directive("notebook", "arguments",
-            $._directive_parameters_wc_interp),
-        output_directive: $ => new_directive("output", "arguments",
-            $._directive_parameters_wc_def),
-        params_directive: $ => new_directive("params", "arguments",
-            $._directive_parameters_wc_none),
-        pepfile_directive: $ => new_directive("pepfile", "arguments",
-            $._directive_parameters_wc_none),
-        pepschema_directive: $ => new_directive("pepschema", "arguments",
-            $._directive_parameters_wc_none),
-        prefix_directive: $ => new_directive("prefix", "arguments",
-            $._directive_parameters_wc_none),
-        priority_directive: $ => new_directive("priority", "arguments",
-            $._directive_parameters_wc_none),
-        resources_directive: $ => new_directive("resources", "arguments",
-            $._directive_parameters_wc_none),
-        retries_directive: $ => new_directive("retries", "arguments",
-            $._directive_parameters_wc_none),
-        ruleorder_directive: $ => new_directive("ruleorder", "arguments",
-            $._directive_parameters_ruleorder),
-        script_directive: $ => new_directive("script", "arguments",
-            $._directive_parameters_wc_interp),
-        shadow_directive: $ => new_directive("shadow", "arguments",
-            $._directive_parameters_wc_none),
-        shell_directive: $ => new_directive("shell", "arguments",
-            $._directive_parameters_wc_interp),
-        singularity_directive: $ => new_directive("singularity", "arguments",
-            $._directive_parameters_wc_none),
-        skip_validation_directive: $ => new_directive("skip_validation", "arguments",
-            $._directive_parameters_wc_none),
-        scattergather_directive: $ => new_directive("scattergather", "arguments",
-            $._directive_parameters_wc_none),
-        snakefile_directive: $ => new_directive("snakefile", "arguments",
-            $._directive_parameters_wc_none),
-        template_engine_directive: $ => new_directive("template_engine", "arguments",
-            $._directive_parameters_wc_none),
-        threads_directive: $ => new_directive("threads", "arguments",
-            $._directive_parameters_wc_none),
-        version_directive: $ => new_directive("version", "arguments",
-            $._directive_parameters_wc_none),
-        wildcard_constraints_directive: $ => new_directive("wildcard_constraints", "arguments",
-            $._directive_parameters_wc_none),
-        workdir_directive: $ => new_directive("workdir", "arguments",
-            $._directive_parameters_wc_none),
-        wrapper_directive: $ => new_directive("wrapper", "arguments",
-            $._directive_parameters_wc_none),
-
-        // Directives with code blocks
-
-        onerror_directive: $ => new_directive("onerror", "body", $._suite),
-        onstart_directive: $ => new_directive("onstart", "body", $._suite),
-        onsuccess_directive: $ => new_directive("onsuccess", "body", $._suite),
-        run_directive: $ => new_directive("run", "body", $._suite),
 
         // DIRECTIVE PARAMETERS
 
