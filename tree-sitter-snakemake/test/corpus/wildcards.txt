@@ -40,10 +40,13 @@ Wildcards (Interpolation)
 rule a:
   shell:
     "a"
-    "{a}"
-    "{a}{b}"
-    "{{a}}{b}{{}}"
-    f"{a}"
+    "{input}"
+    "{input}{output}"
+    "{{input}}{output}{{}}"
+    "{input.a}"
+    "{input[3]}"
+    "{input.a.b[3].x}"
+    f"{input}"
 
 -------------------------------------------------------------------------------
 
@@ -52,5 +55,8 @@ rule a:
   (string (wildcard (identifier)))
   (string (wildcard (identifier)) (wildcard (identifier)))
   (string (wildcard (identifier)))
+  (string (wildcard (attribute (identifier) (identifier))))
+  (string (wildcard (subscript (identifier) (integer))))
+  (string (wildcard (attribute (subscript (attribute (attribute (identifier) (identifier)) (identifier)) (integer)) (identifier))))
   (string (interpolation (identifier)))
 ))))))
