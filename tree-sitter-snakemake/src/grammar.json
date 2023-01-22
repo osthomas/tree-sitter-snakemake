@@ -5960,6 +5960,10 @@
               },
               {
                 "type": "STRING",
+                "value": "group"
+              },
+              {
+                "type": "STRING",
                 "value": "handover"
               },
               {

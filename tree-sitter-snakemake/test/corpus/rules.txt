@@ -143,6 +143,7 @@ rule all:
     "jinja2"
   default_target: True
   envmodules: "a"
+  group: "a"
 
 -------------------------------------------------------------------------------
 
@@ -235,6 +236,9 @@ rule all:
       (directive
         arguments: (directive_parameters
           (true)))
+      (directive
+        arguments: (directive_parameters
+          (string)))
       (directive
         arguments: (directive_parameters
           (string)))

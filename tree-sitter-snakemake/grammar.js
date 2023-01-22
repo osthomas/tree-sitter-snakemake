@@ -193,6 +193,7 @@ module.exports = grammar(PYTHON, {
                 "cwl",
                 "default_target",
                 "envmodules",
+                "group",
                 "handover",
                 "params",
                 "priority",

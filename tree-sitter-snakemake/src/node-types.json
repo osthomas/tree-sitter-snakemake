@@ -1299,6 +1299,10 @@
             "named": false
           },
           {
+            "type": "group",
+            "named": false
+          },
+          {
             "type": "handover",
             "named": false
           },
@@ -3505,6 +3509,10 @@
   },
   {
     "type": "global",
+    "named": false
+  },
+  {
+    "type": "group",
     "named": false
   },
   {
