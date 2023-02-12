@@ -12,6 +12,8 @@
   "use" @include
   "rule" @include
   "from" @include
+  "as"? @include
+  "with"? @include
 )
 
 
@@ -19,7 +21,7 @@
 (rule_inheritance
   "use" @keyword
   "rule" @keyword
-  "from"? @include
+  "with"? @keyword
 )
 
 

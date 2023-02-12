@@ -291,8 +291,12 @@ Rule inheritance
 use rule a as b with:
   output: a
 
+use rule a from b with:
+  output: a
+
 use rule a from b as c with:
   output: a
+
 -------------------------------------------------------------------------------
 
 (module
@@ -303,7 +307,14 @@ use rule a from b as c with:
       (directive
         arguments: (directive_parameters
           (identifier)))))
-  (rule_inheritance
+  (rule_import
+    name: (identifier)
+    module_name: (identifier)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+  (rule_import
     name: (identifier)
     module_name: (identifier)
     alias: (as_pattern_target)

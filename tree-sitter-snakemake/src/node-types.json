@@ -2637,6 +2637,16 @@
           }
         ]
       },
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "rule_body",
+            "named": true
+          }
+        ]
+      },
       "module_name": {
         "multiple": false,
         "required": true,
@@ -2689,16 +2699,6 @@
         "types": [
           {
             "type": "rule_body",
-            "named": true
-          }
-        ]
-      },
-      "module_name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]

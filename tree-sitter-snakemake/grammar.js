@@ -100,7 +100,7 @@ module.exports = grammar(PYTHON, {
             field('body', $.rule_body)
         ),
 
-        rule_import: $ => seq(
+        rule_import: $ => prec.right(seq(
             "use",
             "rule",
             choice(
@@ -115,8 +115,13 @@ module.exports = grammar(PYTHON, {
                 field(
                     "alias",
                     alias($._rule_import_as_pattern_target, $.as_pattern_target))
+            )),
+            optional(seq(
+                "with",
+                ":",
+                field("body", $.rule_body)
             ))
-        ),
+        )),
 
         _rule_import_list: $ => (seq(
             commaSep1(field("name", $.identifier)),
@@ -129,10 +134,6 @@ module.exports = grammar(PYTHON, {
             "use",
             "rule",
             field("name", $.identifier),
-            optional(seq(
-                "from",
-                field("module_name", $.identifier)
-            )),
             "as",
             field("alias", alias($.identifier, $.as_pattern_target)),
             "with",
