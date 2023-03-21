@@ -1,4 +1,4 @@
-const PYTHON = require("tree-sitter-python/grammar")
+const PYTHON = require("../tree-sitter-python/grammar")
 module.exports = grammar(PYTHON, {
     // For reference, see:
     // https://snakemake.readthedocs.io/en/stable/snakefiles/writing_snakefiles.html#grammar
