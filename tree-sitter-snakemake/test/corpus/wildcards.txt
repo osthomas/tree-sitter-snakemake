@@ -19,16 +19,16 @@ rule a:
 -------------------------------------------------------------------------------
 
 (module (rule_definition (identifier) (rule_body (directive (directive_parameters (concatenated_string
-  (string)
+  (string (string_content))
   (string (wildcard (identifier)))
   (string (wildcard (identifier) (constraint)))
   (string (wildcard (identifier) (constraint)) (wildcard (identifier)))
   (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)) (wildcard (identifier)))
+  (string (string_content) (wildcard (identifier)) (wildcard (identifier)))
+  (string (string_content) (wildcard (identifier)) (wildcard (identifier)) (string_content))
+  (string (string_content) (wildcard (identifier)) (wildcard (identifier)) (string_content))
+  (string (string_content) (wildcard (identifier)) (wildcard (identifier)) (string_content))
+  (string (string_content) (wildcard (identifier)) (wildcard (identifier)) (string_content))
   (string (interpolation (identifier)))
 ))))))
 
@@ -51,10 +51,10 @@ rule a:
 -------------------------------------------------------------------------------
 
 (module (rule_definition (identifier) (rule_body (directive (directive_parameters (concatenated_string
-  (string)
+  (string (string_content))
   (string (wildcard (identifier)))
   (string (wildcard (identifier)) (wildcard (identifier)))
-  (string (wildcard (identifier)))
+  (string (string_content) (wildcard (identifier)) (string_content))
   (string (wildcard (attribute (identifier) (identifier))))
   (string (wildcard (subscript (identifier) (integer))))
   (string (wildcard (attribute (subscript (attribute (attribute (identifier) (identifier)) (identifier)) (integer)) (identifier))))
