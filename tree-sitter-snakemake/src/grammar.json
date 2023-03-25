@@ -4621,13 +4621,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "prefix",
           "content": {
-            "type": "SYMBOL",
-            "name": "_string_start"
-          },
-          "named": false,
-          "value": "\""
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_string_start"
+            },
+            "named": false,
+            "value": "\""
+          }
         },
         {
           "type": "REPEAT",
@@ -4635,40 +4639,40 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "interpolation"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_escape_interpolation"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "escape_sequence"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_not_escape_sequence"
+                "type": "FIELD",
+                "name": "interpolation",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "interpolation"
+                }
               },
               {
                 "type": "SYMBOL",
                 "name": "wildcard"
               },
               {
-                "type": "SYMBOL",
-                "name": "_string_content"
+                "type": "FIELD",
+                "name": "string_content",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string_content"
+                }
               }
             ]
           }
         },
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "suffix",
           "content": {
-            "type": "SYMBOL",
-            "name": "_string_end"
-          },
-          "named": false,
-          "value": "\""
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_string_end"
+            },
+            "named": false,
+            "value": "\""
+          }
         }
       ]
     },
