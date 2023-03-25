@@ -15,8 +15,8 @@ rule:
         (directive_parameters
           (integer)
           (integer)
-          (string)))
-      (string))))
+          (string (string_content))))
+      (string (string_content)))))
 
 
 ===============================================================================
@@ -38,8 +38,8 @@ rule:
         (directive_parameters
           (integer)
           (integer)
-          (string)))
-      (string))))
+          (string (string_content))))
+      (string (string_content)))))
 
 
 ===============================================================================
@@ -62,8 +62,8 @@ rule:
           (integer)
           (integer)
           (integer)
-          (string)))
-    (string))))
+          (string (string_content))))
+    (string (string_content)))))
 
 
 ===============================================================================
@@ -82,8 +82,8 @@ rule:
       (directive
        (directive_parameters
         (integer)
-        (string)))
-    (string))))
+        (string (string_content))))
+    (string (string_content)))))
 
 
 ===============================================================================
@@ -100,11 +100,11 @@ rule:
   (rule_definition
     (rule_body
       (concatenated_string
-        (string)
-        (string))
+        (string (string_content))
+        (string (string_content)))
       (directive
        (directive_parameters
-         (string))))))
+         (string (string_content)))))))
 
 
 ===============================================================================
@@ -151,7 +151,8 @@ rule all:
   (rule_definition
     name: (identifier)
     body: (rule_body
-      (string)
+      (string
+        string_content: (string_content))
       (directive
         arguments: (directive_parameters
           (identifier)
@@ -229,19 +230,23 @@ rule all:
         arguments: (directive_parameters
           (keyword_argument
             name: (identifier)
-            value: (string))))
+            value: (string
+              string_content: (string_content)))))
       (directive
         arguments: (directive_parameters
-          (string)))
+          (string
+            string_content: (string_content))))
       (directive
         arguments: (directive_parameters
           (true)))
       (directive
         arguments: (directive_parameters
-          (string)))
+          (string
+            string_content: (string_content))))
       (directive
         arguments: (directive_parameters
-          (string)))
+          (string
+            string_content: (string_content))))
     )
   )
 )
@@ -379,4 +384,4 @@ checkpoint a:
   (rule_body
    (directive
     (directive_parameters
-     (string))))))
+     (string (string_content)))))))

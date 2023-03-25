@@ -47,7 +47,8 @@ envvars: "ABC", "DEF"
     (directive_parameters
       (keyword_argument
         (identifier)
-        (string))))
+        (string
+          (string_content)))))
   (directive
     (directive_parameters
       (identifier)))
@@ -65,14 +66,18 @@ envvars: "ABC", "DEF"
         (integer))))
   (directive
     (directive_parameters
-      (string)))
+      (string
+        (string_content))))
   (directive
     (directive_parameters
-      (string)))
+      (string
+        (string_content))))
   (directive
     (directive_parameters
-      (string)
-      (string)))
+      (string
+        (string_content))
+      (string
+        (string_content))))
 )
 
 
