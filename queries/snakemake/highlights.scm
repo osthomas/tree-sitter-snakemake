@@ -6,6 +6,11 @@
 ;; Simple directives
 (directive name: _ @keyword)
 
+;; rule/module/checkpoint names
+(rule_definition name: (identifier) @type)
+(module_definition name: (identifier) @type)
+(checkpoint_definition name: (identifier) @type)
+
 
 ;; Rule imports
 (rule_import
