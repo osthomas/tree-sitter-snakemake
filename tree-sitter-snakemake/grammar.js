@@ -220,7 +220,7 @@ module.exports = grammar(PYTHON, {
 
         module_definition: $ => seq(
             "module",
-            $.identifier,
+            field("name", $.identifier),
             ":",
             field("body", $.module_body)
         ),
