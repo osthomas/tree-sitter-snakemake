@@ -21,7 +21,7 @@
 (rule_inheritance
   "use" @keyword
   "rule" @keyword
-  "with"? @keyword
+  "with" @keyword
 )
 
 
