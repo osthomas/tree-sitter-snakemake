@@ -52,17 +52,7 @@
    )
 )
 
-(
-  (identifier) @keyword
-  (#has-ancestor? @keyword "wildcard")
-  (#any-of? @keyword
-      "config"
-      "input"
-      "log"
-      "output"
-      "params"
-      "resources"
-      "threads"
-      "wildcards"
-   )
-)
+((wildcard (identifier) @keyword)
+  (#any-of? @keyword "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (attribute object: (identifier) @keyword))
+  (#any-of? @keyword "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
