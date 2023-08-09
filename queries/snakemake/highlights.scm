@@ -3,8 +3,11 @@
 ;; Compound directives
 ["rule" "checkpoint" "module"] @keyword
 
-;; Simple directives
-(directive name: _ @keyword)
+;; Top level directives (eg. configfile, include)
+(module (directive name: _ @keyword))
+
+;; Subordinate directives (eg. input, output)
+(_ body: (_ (directive name: _ @attribute)))
 
 ;; rule/module/checkpoint names
 (rule_definition name: (identifier) @type)
@@ -34,12 +37,12 @@
 (wildcard (identifier) @parameter)
 
 
-;; Keywords in wildcard interpolations
+;; References to directive attributes in wildcard interpolations
 (
-  (identifier) @keyword
-  (#has-ancestor? @keyword "directive")
-  (#has-ancestor? @keyword "block")
-  (#any-of? @keyword
+  (identifier) @attribute
+  (#has-ancestor? @attribute "directive")
+  (#has-ancestor? @attribute "block")
+  (#any-of? @attribute
       "config"
       "input"
       "log"
@@ -51,7 +54,7 @@
    )
 )
 
-((wildcard (identifier) @keyword)
-  (#any-of? @keyword "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
-((wildcard (attribute object: (identifier) @keyword))
-  (#any-of? @keyword "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (identifier) @attribute)
+  (#any-of? @attribute "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (attribute object: (identifier) @attribute))
+  (#any-of? @attribute "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
