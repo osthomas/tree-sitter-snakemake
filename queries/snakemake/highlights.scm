@@ -31,8 +31,7 @@
 
 
 ;; Wildcard names
-;; as @field for consistency with attributes in wildcard interpolations
-(wildcard (identifier) @field)
+(wildcard (identifier) @parameter)
 
 
 ;; Keywords in wildcard interpolations
