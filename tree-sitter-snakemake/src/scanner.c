@@ -57,6 +57,8 @@ enum TokenType {
     WILDCARD_INTERP_OPEN,
 };
 
+typedef enum { NONE, DEFINITION, INTERPOLATION } AllowWildcard;
+
 typedef enum {
     SingleQuote = 1 << 0,
     DoubleQuote = 1 << 1,
@@ -161,14 +163,67 @@ static delimiter_vec delimiter_vec_new() {
 typedef struct {
     indent_vec indents;
     delimiter_vec delimiters;
+    AllowWildcard allow_wc;
     bool inside_f_string;
 } Scanner;
+
+
+// Opening bracket for wildcard interpolation
+bool parse_wc_interp_open(TSLexer *lexer, const bool *valid_symbols, bool has_content) {
+    // Encountered '{' as next symbol and a wildcard interpolation is allowed
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '{') {
+        // Double {{ -> escaped.
+        lexer->advance(lexer, false);
+        lexer->mark_end(lexer);
+        lexer->result_symbol = STRING_CONTENT;
+        return true;
+    } else {
+        lexer->result_symbol = WILDCARD_INTERP_OPEN;
+        return true;
+    }
+}
+
+
+// Opening bracket for wildcard definition
+bool parse_wc_def_open(
+        TSLexer *lexer,
+        const bool *valid_symbols,
+        bool has_content,
+        int32_t end_character) {
+    // Encountered '{' as next symbol and a wildcard definition is allowed
+    // Consume additional { - only the last one opens a wildcard.
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    while (lexer->lookahead == '{' && lexer->lookahead != end_character && !lexer->eof(lexer)) {
+        lexer->mark_end(lexer);
+        lexer->advance(lexer, false);
+        has_content = true;
+    }
+    if (has_content) {
+        lexer->result_symbol = STRING_CONTENT;
+    } else {
+        // Found an opening brace
+        if (lexer->lookahead == '}') {
+            // empty braces -> not a wildcard
+            lexer->mark_end(lexer);
+            lexer->advance(lexer, false);
+            lexer->result_symbol = STRING_CONTENT;
+        } else {
+            // braces have content -> wildcard
+            lexer->result_symbol = WILDCARD_DEF_OPEN;
+            lexer->advance(lexer, false);
+        }
+    }
+    return true;
+}
 
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
 static inline void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
-bool tree_sitter_python_external_scanner_scan(void *payload, TSLexer *lexer,
+bool tree_sitter_snakemake_external_scanner_scan(void *payload, TSLexer *lexer,
                                               const bool *valid_symbols) {
     Scanner *scanner = (Scanner *)payload;
 
@@ -178,8 +233,25 @@ bool tree_sitter_python_external_scanner_scan(void *payload, TSLexer *lexer,
                            valid_symbols[CLOSE_PAREN] ||
                            valid_symbols[CLOSE_BRACKET];
 
+    // Set flag if and which wildcards are allowed. Affects string parsing.
+    if (valid_symbols[ALLOW_WC_DEF] && !error_recovery_mode) {
+        scanner->allow_wc = DEFINITION;
+        lexer->result_symbol = ALLOW_WC_DEF;
+        return true;
+    }
+    if (valid_symbols[ALLOW_WC_INTERP] && !error_recovery_mode) {
+        scanner->allow_wc = INTERPOLATION;
+        lexer->result_symbol = ALLOW_WC_INTERP;
+        return true;
+    }
+    if (valid_symbols[DISALLOW_WC] && !error_recovery_mode) {
+        scanner->allow_wc = NONE;
+        lexer->result_symbol = DISALLOW_WC;
+        return true;
+    }
+
 	bool advanced_once = false;
-    if (valid_symbols[ESCAPE_INTERPOLATION] && scanner->delimiters.len > 0 &&
+    if (valid_symbols[ESCAPE_INTERPOLATION] && scanner->allow_wc == NONE && scanner->delimiters.len > 0 &&
 		(lexer->lookahead == '{' || lexer->lookahead == '}') &&
         !error_recovery_mode) {
         Delimiter delimiter = VEC_BACK(scanner->delimiters);
@@ -205,11 +277,20 @@ bool tree_sitter_python_external_scanner_scan(void *payload, TSLexer *lexer,
         int32_t end_char = end_character(&delimiter);
         bool has_content = advanced_once;
         while (lexer->lookahead) {
-            if ((advanced_once || lexer->lookahead == '{' || lexer->lookahead == '}') &&
-                is_format(&delimiter)) {
-                lexer->mark_end(lexer);
-                lexer->result_symbol = STRING_CONTENT;
-                return has_content;
+            if (advanced_once || lexer->lookahead == '{' || lexer->lookahead == '}') {
+                // How brackets are handled depends on two factors:
+                // 1. Are we in a format string?
+                // 2. Are wildcards allowed?
+                if (is_format(&delimiter)) {
+                    // Format string: no wildcards allowed
+                    lexer->mark_end(lexer);
+                    lexer->result_symbol = STRING_CONTENT;
+                    return has_content;
+                } else if (scanner->allow_wc == INTERPOLATION && lexer->lookahead == '{') {
+                    return parse_wc_interp_open(lexer, valid_symbols, has_content);
+                } else if (scanner->allow_wc == DEFINITION && lexer->lookahead == '{') {
+                    return parse_wc_def_open(lexer, valid_symbols, has_content, end_char);
+                }
             }
             if (lexer->lookahead == '\\') {
                 if (is_raw(&delimiter)) {
@@ -448,4 +529,83 @@ bool tree_sitter_python_external_scanner_scan(void *payload, TSLexer *lexer,
     }
 
     return false;
+}
+
+unsigned tree_sitter_snakemake_external_scanner_serialize(void *payload,
+                                                       char *buffer) {
+    Scanner *scanner = (Scanner *)payload;
+
+    size_t size = 0;
+
+    buffer[size++] = (char)scanner->allow_wc;
+    buffer[size++] = (char)scanner->inside_f_string;
+
+    size_t delimiter_count = scanner->delimiters.len;
+    if (delimiter_count > UINT8_MAX) {
+        delimiter_count = UINT8_MAX;
+    }
+    buffer[size++] = (char)delimiter_count;
+
+    if (delimiter_count > 0) {
+        memcpy(&buffer[size], scanner->delimiters.data, delimiter_count);
+    }
+    size += delimiter_count;
+
+    int iter = 1;
+    for (; iter < scanner->indents.len &&
+           size < TREE_SITTER_SERIALIZATION_BUFFER_SIZE;
+         ++iter) {
+        buffer[size++] = (char)scanner->indents.data[iter];
+    }
+
+    return size;
+}
+
+void tree_sitter_snakemake_external_scanner_deserialize(void *payload,
+                                                     const char *buffer,
+                                                     unsigned length) {
+    Scanner *scanner = (Scanner *)payload;
+
+    VEC_CLEAR(scanner->delimiters);
+    VEC_CLEAR(scanner->indents);
+    VEC_PUSH(scanner->indents, 0);
+
+    if (length > 0) {
+        size_t size = 0;
+
+        scanner->allow_wc = (AllowWildcard)buffer[size++];
+        scanner->inside_f_string = (bool)buffer[size++];
+
+        size_t delimiter_count = (uint8_t)buffer[size++];
+        if (delimiter_count > 0) {
+            VEC_GROW(scanner->delimiters, delimiter_count);
+            scanner->delimiters.len = delimiter_count;
+            memcpy(scanner->delimiters.data, &buffer[size], delimiter_count);
+            size += delimiter_count;
+        }
+
+        for (; size < length; size++) {
+            VEC_PUSH(scanner->indents, (unsigned char)buffer[size]);
+        }
+    }
+}
+
+void *tree_sitter_snakemake_external_scanner_create() {
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
+    _Static_assert(sizeof(Delimiter) == sizeof(char), "");
+#else
+    assert(sizeof(Delimiter) == sizeof(char));
+#endif
+    Scanner *scanner = calloc(1, sizeof(Scanner));
+    scanner->indents = indent_vec_new();
+    scanner->delimiters = delimiter_vec_new();
+    tree_sitter_snakemake_external_scanner_deserialize(scanner, NULL, 0);
+    return scanner;
+}
+
+void tree_sitter_snakemake_external_scanner_destroy(void *payload) {
+    Scanner *scanner = (Scanner *)payload;
+    VEC_FREE(scanner->indents);
+    VEC_FREE(scanner->delimiters);
+    free(scanner);
 }

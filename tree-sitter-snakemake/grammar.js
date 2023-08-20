@@ -312,13 +312,9 @@ module.exports = grammar(PYTHON, {
 
         // STRINGS
         string: $ => seq(
-            field('prefix', alias($._string_start, '"')),
-            repeat(choice(
-                field('interpolation', $.interpolation),
-                $.wildcard,
-                field('string_content', $.string_content)
-            )),
-            field('suffix', alias($._string_end, '"'))
+            $.string_start,
+            repeat(choice($.interpolation, $.wildcard, $.string_content)),
+            $.string_end
         ),
 
         // The WILDCARD_DEF_OPEN and WILDCARD_INTERP_OPEN tokens are emitted by

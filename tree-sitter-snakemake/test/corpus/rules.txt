@@ -15,8 +15,8 @@ rule:
         (directive_parameters
           (integer)
           (integer)
-          (string (string_content))))
-      (string (string_content)))))
+          (string (string_start) (string_content) (string_end))))
+      (string (string_start) (string_content) (string_end)))))
 
 
 ===============================================================================
@@ -38,8 +38,8 @@ rule:
         (directive_parameters
           (integer)
           (integer)
-          (string (string_content))))
-      (string (string_content)))))
+          (string (string_start) (string_content) (string_end))))
+      (string (string_start) (string_content) (string_end)))))
 
 
 ===============================================================================
@@ -62,8 +62,8 @@ rule:
           (integer)
           (integer)
           (integer)
-          (string (string_content))))
-    (string (string_content)))))
+          (string (string_start) (string_content) (string_end))))
+    (string (string_start) (string_content) (string_end)))))
 
 
 ===============================================================================
@@ -82,8 +82,8 @@ rule:
       (directive
        (directive_parameters
         (integer)
-        (string (string_content))))
-    (string (string_content)))))
+        (string (string_start) (string_content) (string_end))))
+    (string (string_start) (string_content) (string_end)))))
 
 
 ===============================================================================
@@ -100,11 +100,11 @@ rule:
   (rule_definition
     (rule_body
       (concatenated_string
-        (string (string_content))
-        (string (string_content)))
+        (string (string_start) (string_content) (string_end))
+        (string (string_start) (string_content) (string_end)))
       (directive
        (directive_parameters
-         (string (string_content)))))))
+         (string (string_start) (string_content) (string_end)))))))
 
 
 ===============================================================================
@@ -151,8 +151,7 @@ rule all:
   (rule_definition
     name: (identifier)
     body: (rule_body
-      (string
-        string_content: (string_content))
+      (string (string_start) (string_content) (string_end))
       (directive
         arguments: (directive_parameters
           (identifier)
@@ -230,23 +229,19 @@ rule all:
         arguments: (directive_parameters
           (keyword_argument
             name: (identifier)
-            value: (string
-              string_content: (string_content)))))
+            value: (string (string_start) (string_content) (string_end)))))
       (directive
         arguments: (directive_parameters
-          (string
-            string_content: (string_content))))
+          (string (string_start) (string_content) (string_end))))
       (directive
         arguments: (directive_parameters
           (true)))
       (directive
         arguments: (directive_parameters
-          (string
-            string_content: (string_content))))
+          (string (string_start) (string_content) (string_end))))
       (directive
         arguments: (directive_parameters
-          (string
-            string_content: (string_content))))
+          (string (string_start) (string_content) (string_end))))
     )
   )
 )
@@ -384,4 +379,4 @@ checkpoint a:
   (rule_body
    (directive
     (directive_parameters
-     (string (string_content)))))))
+     (string (string_start) (string_content) (string_end)))))))
