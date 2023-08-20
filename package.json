@@ -3,7 +3,7 @@
     "tree-sitter-cli": "^0.20.7"
   },
   "name": "tree-sitter-snakemake",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
   "main": "bindings/node",
   "scripts": {
