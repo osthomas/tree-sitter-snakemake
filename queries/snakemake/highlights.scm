@@ -7,7 +7,7 @@
 (module (directive name: _ @keyword))
 
 ;; Subordinate directives (eg. input, output)
-(_ body: (_ (directive name: _ @attribute)))
+(_ body: (_ (directive name: _ @label)))
 
 ;; rule/module/checkpoint names
 (rule_definition name: (identifier) @type)
@@ -37,12 +37,12 @@
 (wildcard (identifier) @variable)
 
 
-;; References to directive attributes in wildcard interpolations
+;; References to directive labels in wildcard interpolations
 (
-  (identifier) @attribute
-  (#has-ancestor? @attribute "directive")
-  (#has-ancestor? @attribute "block")
-  (#any-of? @attribute
+  (identifier) @label
+  (#has-ancestor? @label "directive")
+  (#has-ancestor? @label "block")
+  (#any-of? @label
       "config"
       "input"
       "log"
@@ -54,7 +54,7 @@
    )
 )
 
-((wildcard (identifier) @attribute)
-  (#any-of? @attribute "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
-((wildcard (attribute object: (identifier) @attribute))
-  (#any-of? @attribute "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (identifier) @label)
+  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (attribute object: (identifier) @label))
+  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
