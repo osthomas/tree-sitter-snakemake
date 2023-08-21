@@ -34,7 +34,7 @@
 
 
 ;; Wildcard names
-(wildcard (identifier) @parameter)
+(wildcard (identifier) @variable)
 
 
 ;; References to directive attributes in wildcard interpolations
