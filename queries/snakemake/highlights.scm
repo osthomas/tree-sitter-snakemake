@@ -37,26 +37,20 @@
 (wildcard (identifier) @variable)
 
 
+;; builtin variables
+((identifier) @variable.builtin
+  (#any-of? @variable.builtin "checkpoints" "config" "gather" "rules" "scatter" "workflow"))
+
+
 ;; References to directive labels in wildcard interpolations
-(
-  (identifier) @label
+((identifier) @label
   (#has-ancestor? @label "directive")
   (#has-ancestor? @label "block")
-  (#any-of? @label
-      "config"
-      "input"
-      "log"
-      "output"
-      "params"
-      "resources"
-      "threads"
-      "wildcards"
-   )
-)
+  (#any-of? @label "input" "log" "output" "params" "resources" "threads" "wildcards"))
 
 ((wildcard (identifier) @label)
-  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+  (#any-of? @label "input" "log" "output" "params" "resources" "threads" "wildcards"))
 ((wildcard (attribute object: (identifier) @label))
-  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+  (#any-of? @label "input" "log" "output" "params" "resources" "threads" "wildcards"))
 ((wildcard (subscript value: (identifier) @label))
-  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+  (#any-of? @label "input" "log" "output" "params" "resources" "threads" "wildcards"))
