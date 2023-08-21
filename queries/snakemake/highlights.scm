@@ -58,3 +58,5 @@
   (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
 ((wildcard (attribute object: (identifier) @label))
   (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
+((wildcard (subscript value: (identifier) @label))
+  (#any-of? @label "config" "input" "log" "output" "params" "resources" "threads" "wildcards"))
