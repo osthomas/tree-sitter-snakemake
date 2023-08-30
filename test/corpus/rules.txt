@@ -1,0 +1,382 @@
+===============================================================================
+Directive parameters on one line
+===============================================================================
+
+rule:
+  input: 1, 2, "a"
+  "docstring"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (directive
+        (directive_parameters
+          (integer)
+          (integer)
+          (string (string_start) (string_content) (string_end))))
+      (string (string_start) (string_content) (string_end)))))
+
+
+===============================================================================
+Directive parameters indented
+===============================================================================
+
+rule:
+  input:
+    1, 2,
+    "a"
+  "docstring"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (directive
+        (directive_parameters
+          (integer)
+          (integer)
+          (string (string_start) (string_content) (string_end))))
+      (string (string_start) (string_content) (string_end)))))
+
+
+===============================================================================
+Directive parameters with continued indented line
+===============================================================================
+
+rule:
+  input: 1, 2,
+    3,
+    "a"
+  "docstring"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (directive
+        (directive_parameters
+          (integer)
+          (integer)
+          (integer)
+          (string (string_start) (string_content) (string_end))))
+    (string (string_start) (string_content) (string_end)))))
+
+
+===============================================================================
+Directive parameters with trailing comma
+===============================================================================
+
+rule:
+  input: 1, "a",
+  "docstring"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (directive
+       (directive_parameters
+        (integer)
+        (string (string_start) (string_content) (string_end))))
+    (string (string_start) (string_content) (string_end)))))
+
+
+===============================================================================
+Concatenated docstring
+===============================================================================
+
+rule:
+  "docstring1" "docstring2"
+  input: "a"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (rule_body
+      (concatenated_string
+        (string (string_start) (string_content) (string_end))
+        (string (string_start) (string_content) (string_end)))
+      (directive
+       (directive_parameters
+         (string (string_start) (string_content) (string_end)))))))
+
+
+===============================================================================
+Rule definition
+===============================================================================
+
+rule all:
+  "Docstring"
+  input: a, b
+  output: b,c
+  params: a = 1
+  log: a
+  benchmark: a
+  cache: a
+  message: a
+  threads: a
+  resources: a
+  conda: a
+  container: a
+  singularity: a
+  run:
+    if a:
+      pass
+  shell: a
+  script: a
+  notebook: a
+  shadow: a
+  priority: 1
+  retries: 2
+  cwl: a
+  handover: True
+  wrapper: a
+  wildcard_constraints:
+    a = "x"
+  template_engine:
+    "jinja2"
+  default_target: True
+  envmodules: "a"
+  group: "a"
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    name: (identifier)
+    body: (rule_body
+      (string (string_start) (string_content) (string_end))
+      (directive
+        arguments: (directive_parameters
+          (identifier)
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (keyword_argument
+            name: (identifier)
+            value: (integer))))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        body: (block
+          (if_statement
+            condition: (identifier)
+            consequence: (block
+              (pass_statement)))))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (integer)))
+      (directive
+        arguments: (directive_parameters
+          (integer)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (true)))
+      (directive
+        arguments: (directive_parameters
+          (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (keyword_argument
+            name: (identifier)
+            value: (string (string_start) (string_content) (string_end)))))
+      (directive
+        arguments: (directive_parameters
+          (string (string_start) (string_content) (string_end))))
+      (directive
+        arguments: (directive_parameters
+          (true)))
+      (directive
+        arguments: (directive_parameters
+          (string (string_start) (string_content) (string_end))))
+      (directive
+        arguments: (directive_parameters
+          (string (string_start) (string_content) (string_end))))
+    )
+  )
+)
+
+
+===============================================================================
+Module definition
+===============================================================================
+
+module a:
+  snakefile: a
+  meta_wrapper: a
+  config: a
+  skip_validation: True
+  prefix: a
+
+-------------------------------------------------------------------------------
+
+(module
+  (module_definition
+    (identifier)
+    (module_body
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (true)))
+      (directive
+        (directive_parameters
+          (identifier)))
+    )
+  )
+)
+
+
+===============================================================================
+Rule inheritance
+===============================================================================
+
+use rule a as b with:
+  output: a
+
+use rule a from b with:
+  output: a
+
+use rule a from b as c with:
+  output: a
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_inheritance
+    name: (identifier)
+    alias: (as_pattern_target)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier)
+    alias: (as_pattern_target)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+)
+
+
+===============================================================================
+Rule import
+===============================================================================
+
+use rule * from a
+use rule a from b
+use rule a, b from c
+use rule (a, b) from c
+use rule * from a as other_*
+use rule * from a as *_other
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    alias: (as_pattern_target))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    alias: (as_pattern_target))
+)
+
+
+===============================================================================
+Checkpoint definition
+===============================================================================
+
+checkpoint a:
+  output: "b"
+
+-------------------------------------------------------------------------------
+
+(module
+ (checkpoint_definition
+  (identifier)
+  (rule_body
+   (directive
+    (directive_parameters
+     (string (string_start) (string_content) (string_end)))))))

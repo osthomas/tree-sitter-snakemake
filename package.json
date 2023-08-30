@@ -1,14 +1,15 @@
 {
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.7"
+    "tree-sitter-cli": "^0.20.8",
+    "tree-sitter-python": "^0.20.4"
   },
   "name": "tree-sitter-snakemake",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
   "main": "bindings/node",
   "scripts": {
-    "test": "(cd tree-sitter-snakemake && tree-sitter test)",
-    "build": "(cd tree-sitter-snakemake && tree-sitter generate --no-bindings)"
+    "test": "tree-sitter test",
+    "build": "tree-sitter generate --no-bindings"
   },
   "keywords": [
     "parser",
