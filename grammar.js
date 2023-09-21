@@ -141,16 +141,19 @@ module.exports = grammar(PYTHON, {
             field("body", $.rule_body)
         ),
 
-        rule_body: $ => seq(
-            $._indent,
-            repeat1(
-                choice(
-                    prec(-1, $.string),
-                    prec(1, $.concatenated_string), // docstrings
-                    $._rule_directive
-                )
+        rule_body: $ => choice(
+            seq(
+                $._indent,
+                repeat1(
+                    choice(
+                        prec(-1, $.string),
+                        prec(1, $.concatenated_string), // docstrings
+                        $._rule_directive
+                    )
+                ),
+                $._dedent
             ),
-            $._dedent
+            $._newline
         ),
 
         // Directives which can appear in rule definitions
@@ -225,16 +228,19 @@ module.exports = grammar(PYTHON, {
             field("body", $.module_body)
         ),
 
-        module_body: $ => seq(
-            $._indent,
-            repeat1(
-                choice(
-                    prec(-1, $.string),
-                    prec(1, $.concatenated_string), // docstrings
-                    $._module_directive
-                )
+        module_body: $ => choice(
+            seq(
+                $._indent,
+                repeat1(
+                    choice(
+                        prec(-1, $.string),
+                        prec(1, $.concatenated_string), // docstrings
+                        $._module_directive
+                    )
+                ),
+                $._dedent
             ),
-            $._dedent
+            $._newline
         ),
 
         _module_directive: $ => alias(choice(
@@ -395,6 +401,8 @@ function directive_parameters($, rule) {
                 commaSep1(rule),
                 $._dedent
             ),
-        )
+        ),
+        // empty: this is syntactically invalid, but improves live highlighting
+        $._newline
     ))
 }
