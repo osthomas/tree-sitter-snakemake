@@ -6698,43 +6698,52 @@
       ]
     },
     "rule_body": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_indent"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PREC",
-                "value": -1,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "string"
-                }
-              },
-              {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "concatenated_string"
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_rule_directive"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_indent"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "PREC",
+                    "value": -1,
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "string"
+                    }
+                  },
+                  {
+                    "type": "PREC",
+                    "value": 1,
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "concatenated_string"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_rule_directive"
+                  }
+                ]
               }
-            ]
-          }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_dedent"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
-          "name": "_dedent"
+          "name": "_newline"
         }
       ]
     },
@@ -7001,43 +7010,52 @@
       ]
     },
     "module_body": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_indent"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PREC",
-                "value": -1,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "string"
-                }
-              },
-              {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "concatenated_string"
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_module_directive"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_indent"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "PREC",
+                    "value": -1,
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "string"
+                    }
+                  },
+                  {
+                    "type": "PREC",
+                    "value": 1,
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "concatenated_string"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_module_directive"
+                  }
+                ]
               }
-            ]
-          }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_dedent"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
-          "name": "_dedent"
+          "name": "_newline"
         }
       ]
     },
@@ -7259,6 +7277,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
         }
       ]
     },
@@ -7436,6 +7458,10 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
             }
           ]
         },
@@ -7619,6 +7645,10 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
             }
           ]
         },
@@ -7819,6 +7849,10 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
         }
       ]
     },
