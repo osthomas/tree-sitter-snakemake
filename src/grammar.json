@@ -2001,6 +2001,18 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "]"
         }
@@ -6029,17 +6041,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "[Ll]"
-                  },
-                  {
-                    "type": "PATTERN",
-                    "value": "[jJ]"
-                  }
-                ]
+                "type": "PATTERN",
+                "value": "[jJ]"
               },
               {
                 "type": "BLANK"
@@ -8121,6 +8124,10 @@
       "value": "}"
     },
     {
+      "type": "STRING",
+      "value": "except"
+    },
+    {
       "type": "SYMBOL",
       "name": "_ALLOW_WC_DEF"
     },
@@ -8161,4 +8168,3 @@
     "parameter"
   ]
 }
-
