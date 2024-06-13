@@ -2,8 +2,6 @@
 
 [![CI](https://github.com/osthomas/tree-sitter-snakemake/workflows/CI/badge.svg)](https://github.com/osthomas/tree-sitter-snakemake/actions)
 
-**Work in Progress**
-
 A tree-sitter grammar for
 [snakemake](https://snakemake.readthedocs.io/en/stable/),
 a workflow management system.
