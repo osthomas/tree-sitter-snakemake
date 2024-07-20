@@ -43,6 +43,7 @@ rule a:
     "{input[3]}"
     "{input.a.b[3].x}"
     f"{input}"
+    "{input:q}"
 
 -------------------------------------------------------------------------------
 
@@ -55,4 +56,5 @@ rule a:
   (string (string_start) (wildcard (subscript (identifier) (integer))) (string_end))
   (string (string_start) (wildcard (attribute (subscript (attribute (attribute (identifier) (identifier)) (identifier)) (integer)) (identifier))) (string_end))
   (string (string_start) (interpolation (identifier)) (string_end))
+  (string (string_start) (wildcard (identifier) (flag)) (string_end))
 ))))))

@@ -340,6 +340,13 @@ module.exports = grammar(PYTHON, {
             "}"
         ),
 
+
+        // Flags to treat wildcard interpolations specially
+        flag: $ => choice(
+            "q"  // quote elements that contain whitespace
+        ),
+
+
         _wildcard_interpolation: $ => seq(
             $._WILDCARD_INTERP_OPEN,
             "{",
@@ -348,6 +355,10 @@ module.exports = grammar(PYTHON, {
                 $.attribute,
                 $.subscript
             ),
+            optional(seq(
+                ":",
+                $.flag
+            )),
             "}"
         ),
 
