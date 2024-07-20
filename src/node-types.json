@@ -1918,6 +1918,11 @@
     }
   },
   {
+    "type": "flag",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "for_in_clause",
     "named": true,
     "fields": {
@@ -3752,6 +3757,10 @@
           "named": true
         },
         {
+          "type": "flag",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4317,6 +4326,10 @@
   },
   {
     "type": "priority",
+    "named": false
+  },
+  {
+    "type": "q",
     "named": false
   },
   {

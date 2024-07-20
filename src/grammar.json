@@ -7973,6 +7973,15 @@
         }
       ]
     },
+    "flag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "q"
+        }
+      ]
+    },
     "_wildcard_interpolation": {
       "type": "SEQ",
       "members": [
@@ -7998,6 +8007,27 @@
             {
               "type": "SYMBOL",
               "name": "subscript"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "flag"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
             }
           ]
         },
