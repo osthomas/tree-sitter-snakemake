@@ -51,6 +51,8 @@ rule:
     3,
     "a"
   "docstring"
+  output: 1, 2,,  # no trailing comma allowed with this form
+    3
 
 -------------------------------------------------------------------------------
 
@@ -63,7 +65,11 @@ rule:
           (integer)
           (integer)
           (string (string_start) (string_content) (string_end))))
-    (string (string_start) (string_content) (string_end)))))
+    (string (string_start) (string_content) (string_end))
+      (directive
+        (directive_parameters
+          (integer) (integer) (ERROR) (comment) (integer)))
+)))
 
 
 ===============================================================================
@@ -297,3 +303,55 @@ checkpoint a:
    (directive
     (directive_parameters
      (string (string_start) (string_content) (string_end)))))))
+
+
+===============================================================================
+Rule with comments
+===============================================================================
+
+rule:
+# comment
+  input: 1, 2, "a"
+  # comment
+  "docstring"
+  output: #comment
+    # comment
+    1
+  params:
+# comment
+  #comment
+    # comment
+    1
+  output: "a", "b",
+# comment
+    9
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (comment)
+    (rule_body
+      (directive
+        (directive_parameters
+          (integer)
+          (integer)
+          (string (string_start) (string_content) (string_end))))
+      (comment)
+      (string (string_start) (string_content) (string_end))
+      (directive
+        (directive_parameters
+          (comment) (comment)
+          (integer)))
+      (directive
+        (directive_parameters
+          (comment) (comment) (comment)
+          (integer)))
+      (directive
+        (directive_parameters
+          (string (string_start) (string_content) (string_end))
+          (string (string_start) (string_content) (string_end))
+          (comment)
+          (integer)))
+    )
+))

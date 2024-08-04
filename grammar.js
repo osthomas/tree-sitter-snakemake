@@ -84,7 +84,7 @@ module.exports = grammar(PYTHON, {
                 field('name', $.identifier)
             ),
             ":",
-            field('body', $.rule_body)
+            field('body', $._rule_suite)
         ),
 
         checkpoint_definition: $ => seq(
@@ -93,7 +93,7 @@ module.exports = grammar(PYTHON, {
                 field('name', $.identifier)
             ),
             ":",
-            field('body', $.rule_body)
+            field('body', $._rule_suite)
         ),
 
         rule_import: $ => prec.right(seq(
@@ -118,7 +118,7 @@ module.exports = grammar(PYTHON, {
             optional(seq(
                 "with",
                 ":",
-                field("body", $.rule_body)
+                field("body", $._rule_suite)
             ))
         )),
 
@@ -141,22 +141,25 @@ module.exports = grammar(PYTHON, {
             field("alias", alias($.identifier, $.as_pattern_target)),
             "with",
             ":",
-            field("body", $.rule_body)
+            field("body", $._rule_suite)
         ),
 
-        rule_body: $ => choice(
-            seq(
-                $._indent,
-                repeat1(
-                    choice(
-                        prec(-1, $.string),
-                        prec(1, $.concatenated_string), // docstrings
-                        $._rule_directive
-                    )
-                ),
-                $._dedent
-            ),
-            $._newline
+        // analogous to tree-sitter-python: _suite
+        _rule_suite: $ => choice(
+          seq($._indent, $.rule_body),
+          $._newline,
+        ),
+
+        // analogous to tree-sitter-python: block
+        rule_body: $ => seq(
+          repeat(
+            choice(
+              prec(-1, $.string),
+              prec(1, $.concatenated_string), // docstrings
+              $._rule_directive
+            )
+          ),
+          $._dedent
         ),
 
         // Directives which can appear in rule definitions
@@ -297,7 +300,7 @@ module.exports = grammar(PYTHON, {
         ),
 
         // Identifier list (for localrules)
-        __directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
+        __directive_parameters_identifiers: $ => directive_parameters($, $.identifier),
         _directive_parameters_identifiers: $ => alias(
             $.__directive_parameters_identifiers,
             $.directive_parameters
@@ -400,23 +403,14 @@ function new_directive(name, body_name, parameters) {
 function directive_parameters($, rule) {
     return(choice(
         // Single line
-        seq(
-            commaSep1(rule),
-            $._newline
-        ),
+        seq(commaSep1(rule), $._newline),
         // Indented block
         seq(
-            $._indent,
-            commaSep1(rule),
-            $._dedent
-        ),
-        // On opening line + subsequently indented
-        seq(
-            commaSep1(rule),
-            ",",
+            // Can start on opening line (unindented)
+            optional(seq(commaSep1(rule, sep_trail = false), ",")),
             seq(
                 $._indent,
-                commaSep1(rule),
+                optional(commaSep1(rule)),
                 $._dedent
             ),
         ),
