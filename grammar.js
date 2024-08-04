@@ -101,16 +101,13 @@ module.exports = grammar(PYTHON, {
             "rule",
             choice(
                 $.wildcard_import,
-                $._rule_import_list,
-                seq("(", $._rule_import_list, ")")
+                $.rule_import_list
             ),
             "from",
             field("module_name", $.identifier),
             optional(seq(
                 "exclude",
-                $._rule_exclude_list
-                // as of snakemake 8.4.8, a parenthesized rule exclude list is
-                // invalid (as opposed to a parenthesized rule import list)
+                $.rule_exclude_list
             )),
             optional(seq(
                 "as",
@@ -125,13 +122,14 @@ module.exports = grammar(PYTHON, {
             ))
         )),
 
-        _rule_import_list: $ => (seq(
-            commaSep1(field("name", $.identifier))
-        )),
+        rule_import_list: $ => choice(
+          commaSep1($.identifier),
+          seq("(", commaSep1($.identifier), ")")
+        ),
 
-        _rule_exclude_list: $ => (seq(
-            commaSep1(field("exclude", $.identifier))
-        )),
+        // as of snakemake 8.4.8, a parenthesized rule exclude list is
+        // invalid (as opposed to a parenthesized rule import list)
+        rule_exclude_list: $ => commaSep1($.identifier),
 
         _rule_import_as_pattern_target: $ => /[_*\p{XID_Start}][_*\p{XID_Continue}]*/,
 

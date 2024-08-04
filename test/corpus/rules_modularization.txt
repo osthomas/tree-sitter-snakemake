@@ -53,15 +53,13 @@ use rule * from a as *_other
     (wildcard_import)
     module_name: (identifier))
   (rule_import
-    name: (identifier)
+    (rule_import_list (identifier))
     module_name: (identifier))
   (rule_import
-    name: (identifier)
-    name: (identifier)
+    (rule_import_list (identifier) (identifier))
     module_name: (identifier))
   (rule_import
-    name: (identifier)
-    name: (identifier)
+    (rule_import_list (identifier) (identifier))
     module_name: (identifier))
   (rule_import
     (wildcard_import)
@@ -88,23 +86,25 @@ use rule * from a exclude a, b as other_*
   (rule_import
     (wildcard_import)
     module_name: (identifier)
-    exclude: (identifier))
+    (rule_exclude_list (identifier))
+  )
   (rule_import
     (wildcard_import)
     module_name: (identifier)
-    exclude: (identifier)
-    exclude: (identifier))
+    (rule_exclude_list (identifier) (identifier))
+  )
   (rule_import
     (wildcard_import)
     module_name: (identifier)
-    exclude: (identifier)
-    alias: (as_pattern_target))
+    (rule_exclude_list (identifier))
+    alias: (as_pattern_target)
+  )
   (rule_import
     (wildcard_import)
     module_name: (identifier)
-    exclude: (identifier)
-    exclude: (identifier)
-    alias: (as_pattern_target))
+    (rule_exclude_list (identifier) (identifier))
+    alias: (as_pattern_target)
+  )
 )
 
 
@@ -132,14 +132,14 @@ use rule a from b as c with:
         arguments: (directive_parameters
           (identifier)))))
   (rule_import
-    name: (identifier)
+    (rule_import_list (identifier))
     module_name: (identifier)
     body: (rule_body
       (directive
         arguments: (directive_parameters
           (identifier)))))
   (rule_import
-    name: (identifier)
+    (rule_import_list (identifier))
     module_name: (identifier)
     alias: (as_pattern_target)
     body: (rule_body
