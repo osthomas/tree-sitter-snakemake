@@ -14,10 +14,6 @@ module.exports = grammar(PYTHON, {
         $._WILDCARD_INTERP_OPEN
     ]),
 
-    conflicts: ($, original) => original.concat([
-        [$._rule_import_list, $.rule_inheritance],
-    ]),
-
     inline: ($, original) => original.concat([
         $._simple_directive,
         $._rule_directive,
