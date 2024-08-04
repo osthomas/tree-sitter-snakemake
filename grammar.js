@@ -199,6 +199,7 @@ module.exports = grammar(PYTHON, {
                 "envmodules",
                 "group",
                 "handover",
+                "localrule",
                 "params",
                 "priority",
                 "resources",

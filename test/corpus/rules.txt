@@ -135,6 +135,7 @@ rule all:
   priority: 1
   retries: 2
   cwl: a
+  localrule: False
   handover: True
   wrapper: a
   wildcard_constraints:
@@ -219,6 +220,9 @@ rule all:
       (directive
         arguments: (directive_parameters
           (identifier)))
+      (directive
+        arguments: (directive_parameters
+          (false)))
       (directive
         arguments: (directive_parameters
           (true)))
