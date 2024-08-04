@@ -124,8 +124,7 @@ module.exports = grammar(PYTHON, {
         )),
 
         _rule_import_list: $ => (seq(
-            commaSep1(field("name", $.identifier)),
-            optional(",")
+            commaSep1(field("name", $.identifier))
         )),
 
         _rule_import_as_pattern_target: $ => /[_*\p{XID_Start}][_*\p{XID_Continue}]*/,
@@ -374,12 +373,16 @@ module.exports = grammar(PYTHON, {
     }
 });
 
-function commaSep1(rule) {
-  return sep1(rule, ',')
+function commaSep1(rule, sep_trail = true) {
+  return sep1(rule, ',', sep_trail = sep_trail)
 }
 
-function sep1(rule, separator) {
-  return seq(rule, repeat(seq(separator, rule)))
+function sep1(rule, separator, sep_trail = true) {
+  if (sep_trail) {
+    return seq(rule, repeat(seq(separator, rule)), optional(separator))
+  } else {
+    return seq(rule, repeat(seq(separator, rule)))
+  }
 }
 
 function new_directive(name, body_name, parameters) {
@@ -395,7 +398,6 @@ function directive_parameters($, rule) {
         // Single line
         seq(
             commaSep1(rule),
-            optional(","),
             $._newline
         ),
         // Indented block

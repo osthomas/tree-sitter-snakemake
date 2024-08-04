@@ -73,6 +73,13 @@ Directive parameters with trailing comma
 rule:
   input: 1, "a",
   "docstring"
+  input: 1,
+    2,
+  input:
+    1, 2,
+  input:
+    1, 2,
+    3,
 
 -------------------------------------------------------------------------------
 
@@ -83,7 +90,30 @@ rule:
        (directive_parameters
         (integer)
         (string (string_start) (string_content) (string_end))))
-    (string (string_start) (string_content) (string_end)))))
+    (string (string_start) (string_content) (string_end))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)
+        (integer)))
+)))
+
+
+===============================================================================
+Directive parameters can not contain multiple trailing commas
+:error
+===============================================================================
+
+rule:
+  input: 1, 2, ,
 
 
 ===============================================================================
