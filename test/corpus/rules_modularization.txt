@@ -1,0 +1,149 @@
+===============================================================================
+Module definition
+===============================================================================
+
+module a:
+  snakefile: a
+  meta_wrapper: a
+  config: a
+  skip_validation: True
+  prefix: a
+
+-------------------------------------------------------------------------------
+
+(module
+  (module_definition
+    (identifier)
+    (module_body
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (identifier)))
+      (directive
+        (directive_parameters
+          (true)))
+      (directive
+        (directive_parameters
+          (identifier)))
+    )
+  )
+)
+
+
+===============================================================================
+Rule import without exclude
+===============================================================================
+
+use rule * from a
+use rule a from b
+use rule a, b from c
+use rule (a, b) from c
+use rule * from a as other_*
+use rule * from a as *_other
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    name: (identifier)
+    name: (identifier)
+    module_name: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    alias: (as_pattern_target))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    alias: (as_pattern_target))
+)
+
+
+===============================================================================
+Rule import with exclude
+===============================================================================
+
+use rule * from a exclude a
+use rule * from a exclude a, b
+use rule * from a exclude a as other_*
+use rule * from a exclude a, b as other_*
+
+-------------------------------------------------------------------------------
+(module
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    exclude: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    alias: (as_pattern_target))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    exclude: (identifier)
+    alias: (as_pattern_target))
+)
+
+
+===============================================================================
+Rule inheritance
+===============================================================================
+
+use rule a as b with:
+  output: a
+
+use rule a from b with:
+  output: a
+
+use rule a from b as c with:
+  output: a
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_inheritance
+    name: (identifier)
+    alias: (as_pattern_target)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+  (rule_import
+    name: (identifier)
+    module_name: (identifier)
+    alias: (as_pattern_target)
+    body: (rule_body
+      (directive
+        arguments: (directive_parameters
+          (identifier)))))
+)
