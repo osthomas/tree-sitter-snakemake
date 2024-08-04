@@ -360,7 +360,7 @@ use rule a from b as c with:
 
 
 ===============================================================================
-Rule import
+Rule import without exclude
 ===============================================================================
 
 use rule * from a
@@ -394,6 +394,40 @@ use rule * from a as *_other
   (rule_import
     (wildcard_import)
     module_name: (identifier)
+    alias: (as_pattern_target))
+)
+
+
+===============================================================================
+Rule import with exclude
+===============================================================================
+
+use rule * from a exclude a
+use rule * from a exclude a, b
+use rule * from a exclude a as other_*
+use rule * from a exclude a, b as other_*
+
+-------------------------------------------------------------------------------
+(module
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    exclude: (identifier))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    alias: (as_pattern_target))
+  (rule_import
+    (wildcard_import)
+    module_name: (identifier)
+    exclude: (identifier)
+    exclude: (identifier)
     alias: (as_pattern_target))
 )
 
