@@ -24,7 +24,8 @@
       "file-types": [
         "Snakefile",
         "smk"
-      ]
+      ],
+      "highlights": "queries/snakemake/highlights.scm"
     }
   ],
   "dependencies": {
