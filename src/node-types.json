@@ -976,7 +976,7 @@
     "fields": {
       "body": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "rule_body",
@@ -1574,6 +1574,10 @@
           },
           {
             "type": "input",
+            "named": false
+          },
+          {
+            "type": "localrule",
             "named": false
           },
           {
@@ -3071,7 +3075,7 @@
     "fields": {
       "body": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "rule_body",
@@ -3089,6 +3093,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "rule_exclude_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3124,24 +3143,37 @@
             "named": true
           }
         ]
-      },
-      "name": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
+          "type": "rule_exclude_list",
+          "named": true
+        },
+        {
+          "type": "rule_import_list",
+          "named": true
+        },
+        {
           "type": "wildcard_import",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rule_import_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -3163,7 +3195,7 @@
       },
       "body": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "rule_body",
@@ -4157,6 +4189,10 @@
     "named": false
   },
   {
+    "type": "exclude",
+    "named": false
+  },
+  {
     "type": "exec",
     "named": false
   },
@@ -4235,6 +4271,10 @@
   {
     "type": "line_continuation",
     "named": true
+  },
+  {
+    "type": "localrule",
+    "named": false
   },
   {
     "type": "localrules",

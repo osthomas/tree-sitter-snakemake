@@ -51,6 +51,8 @@ rule:
     3,
     "a"
   "docstring"
+  output: 1, 2,,  # no trailing comma allowed with this form
+    3
 
 -------------------------------------------------------------------------------
 
@@ -63,7 +65,11 @@ rule:
           (integer)
           (integer)
           (string (string_start) (string_content) (string_end))))
-    (string (string_start) (string_content) (string_end)))))
+    (string (string_start) (string_content) (string_end))
+      (directive
+        (directive_parameters
+          (integer) (integer) (ERROR) (comment) (integer)))
+)))
 
 
 ===============================================================================
@@ -73,6 +79,13 @@ Directive parameters with trailing comma
 rule:
   input: 1, "a",
   "docstring"
+  input: 1,
+    2,
+  input:
+    1, 2,
+  input:
+    1, 2,
+    3,
 
 -------------------------------------------------------------------------------
 
@@ -83,7 +96,30 @@ rule:
        (directive_parameters
         (integer)
         (string (string_start) (string_content) (string_end))))
-    (string (string_start) (string_content) (string_end)))))
+    (string (string_start) (string_content) (string_end))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)))
+      (directive
+       (directive_parameters
+        (integer)
+        (integer)
+        (integer)))
+)))
+
+
+===============================================================================
+Directive parameters can not contain multiple trailing commas
+:error
+===============================================================================
+
+rule:
+  input: 1, 2, ,
 
 
 ===============================================================================
@@ -135,6 +171,7 @@ rule all:
   priority: 1
   retries: 2
   cwl: a
+  localrule: False
   handover: True
   wrapper: a
   wildcard_constraints:
@@ -221,6 +258,9 @@ rule all:
           (identifier)))
       (directive
         arguments: (directive_parameters
+          (false)))
+      (directive
+        arguments: (directive_parameters
           (true)))
       (directive
         arguments: (directive_parameters
@@ -248,123 +288,6 @@ rule all:
 
 
 ===============================================================================
-Module definition
-===============================================================================
-
-module a:
-  snakefile: a
-  meta_wrapper: a
-  config: a
-  skip_validation: True
-  prefix: a
-
--------------------------------------------------------------------------------
-
-(module
-  (module_definition
-    (identifier)
-    (module_body
-      (directive
-        (directive_parameters
-          (identifier)))
-      (directive
-        (directive_parameters
-          (identifier)))
-      (directive
-        (directive_parameters
-          (identifier)))
-      (directive
-        (directive_parameters
-          (true)))
-      (directive
-        (directive_parameters
-          (identifier)))
-    )
-  )
-)
-
-
-===============================================================================
-Rule inheritance
-===============================================================================
-
-use rule a as b with:
-  output: a
-
-use rule a from b with:
-  output: a
-
-use rule a from b as c with:
-  output: a
-
--------------------------------------------------------------------------------
-
-(module
-  (rule_inheritance
-    name: (identifier)
-    alias: (as_pattern_target)
-    body: (rule_body
-      (directive
-        arguments: (directive_parameters
-          (identifier)))))
-  (rule_import
-    name: (identifier)
-    module_name: (identifier)
-    body: (rule_body
-      (directive
-        arguments: (directive_parameters
-          (identifier)))))
-  (rule_import
-    name: (identifier)
-    module_name: (identifier)
-    alias: (as_pattern_target)
-    body: (rule_body
-      (directive
-        arguments: (directive_parameters
-          (identifier)))))
-)
-
-
-===============================================================================
-Rule import
-===============================================================================
-
-use rule * from a
-use rule a from b
-use rule a, b from c
-use rule (a, b) from c
-use rule * from a as other_*
-use rule * from a as *_other
-
--------------------------------------------------------------------------------
-
-(module
-  (rule_import
-    (wildcard_import)
-    module_name: (identifier))
-  (rule_import
-    name: (identifier)
-    module_name: (identifier))
-  (rule_import
-    name: (identifier)
-    name: (identifier)
-    module_name: (identifier))
-  (rule_import
-    name: (identifier)
-    name: (identifier)
-    module_name: (identifier))
-  (rule_import
-    (wildcard_import)
-    module_name: (identifier)
-    alias: (as_pattern_target))
-  (rule_import
-    (wildcard_import)
-    module_name: (identifier)
-    alias: (as_pattern_target))
-)
-
-
-===============================================================================
 Checkpoint definition
 ===============================================================================
 
@@ -380,3 +303,55 @@ checkpoint a:
    (directive
     (directive_parameters
      (string (string_start) (string_content) (string_end)))))))
+
+
+===============================================================================
+Rule with comments
+===============================================================================
+
+rule:
+# comment
+  input: 1, 2, "a"
+  # comment
+  "docstring"
+  output: #comment
+    # comment
+    1
+  params:
+# comment
+  #comment
+    # comment
+    1
+  output: "a", "b",
+# comment
+    9
+
+-------------------------------------------------------------------------------
+
+(module
+  (rule_definition
+    (comment)
+    (rule_body
+      (directive
+        (directive_parameters
+          (integer)
+          (integer)
+          (string (string_start) (string_content) (string_end))))
+      (comment)
+      (string (string_start) (string_content) (string_end))
+      (directive
+        (directive_parameters
+          (comment) (comment)
+          (integer)))
+      (directive
+        (directive_parameters
+          (comment) (comment) (comment)
+          (integer)))
+      (directive
+        (directive_parameters
+          (string (string_start) (string_content) (string_end))
+          (string (string_start) (string_content) (string_end))
+          (comment)
+          (integer)))
+    )
+))

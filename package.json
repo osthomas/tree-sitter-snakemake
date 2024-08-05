@@ -4,7 +4,7 @@
     "tree-sitter-python": "^0.21.0"
   },
   "name": "tree-sitter-snakemake",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
   "main": "bindings/node",
   "scripts": {
@@ -24,7 +24,8 @@
       "file-types": [
         "Snakefile",
         "smk"
-      ]
+      ],
+      "highlights": "queries/snakemake/highlights.scm"
     }
   ],
   "dependencies": {

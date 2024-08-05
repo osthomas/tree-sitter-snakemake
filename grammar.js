@@ -14,10 +14,6 @@ module.exports = grammar(PYTHON, {
         $._WILDCARD_INTERP_OPEN
     ]),
 
-    conflicts: ($, original) => original.concat([
-        [$._rule_import_list, $.rule_inheritance],
-    ]),
-
     inline: ($, original) => original.concat([
         $._simple_directive,
         $._rule_directive,
@@ -88,7 +84,7 @@ module.exports = grammar(PYTHON, {
                 field('name', $.identifier)
             ),
             ":",
-            field('body', $.rule_body)
+            field('body', $._rule_suite)
         ),
 
         checkpoint_definition: $ => seq(
@@ -97,7 +93,7 @@ module.exports = grammar(PYTHON, {
                 field('name', $.identifier)
             ),
             ":",
-            field('body', $.rule_body)
+            field('body', $._rule_suite)
         ),
 
         rule_import: $ => prec.right(seq(
@@ -105,11 +101,14 @@ module.exports = grammar(PYTHON, {
             "rule",
             choice(
                 $.wildcard_import,
-                $._rule_import_list,
-                seq("(", $._rule_import_list, ")")
+                $.rule_import_list
             ),
             "from",
             field("module_name", $.identifier),
+            optional(seq(
+                "exclude",
+                $.rule_exclude_list
+            )),
             optional(seq(
                 "as",
                 field(
@@ -119,14 +118,18 @@ module.exports = grammar(PYTHON, {
             optional(seq(
                 "with",
                 ":",
-                field("body", $.rule_body)
+                field("body", $._rule_suite)
             ))
         )),
 
-        _rule_import_list: $ => (seq(
-            commaSep1(field("name", $.identifier)),
-            optional(",")
-        )),
+        rule_import_list: $ => choice(
+          commaSep1($.identifier),
+          seq("(", commaSep1($.identifier), ")")
+        ),
+
+        // as of snakemake 8.4.8, a parenthesized rule exclude list is
+        // invalid (as opposed to a parenthesized rule import list)
+        rule_exclude_list: $ => commaSep1($.identifier),
 
         _rule_import_as_pattern_target: $ => /[_*\p{XID_Start}][_*\p{XID_Continue}]*/,
 
@@ -138,22 +141,25 @@ module.exports = grammar(PYTHON, {
             field("alias", alias($.identifier, $.as_pattern_target)),
             "with",
             ":",
-            field("body", $.rule_body)
+            field("body", $._rule_suite)
         ),
 
-        rule_body: $ => choice(
-            seq(
-                $._indent,
-                repeat1(
-                    choice(
-                        prec(-1, $.string),
-                        prec(1, $.concatenated_string), // docstrings
-                        $._rule_directive
-                    )
-                ),
-                $._dedent
-            ),
-            $._newline
+        // analogous to tree-sitter-python: _suite
+        _rule_suite: $ => choice(
+          seq($._indent, $.rule_body),
+          $._newline,
+        ),
+
+        // analogous to tree-sitter-python: block
+        rule_body: $ => seq(
+          repeat(
+            choice(
+              prec(-1, $.string),
+              prec(1, $.concatenated_string), // docstrings
+              $._rule_directive
+            )
+          ),
+          $._dedent
         ),
 
         // Directives which can appear in rule definitions
@@ -199,6 +205,7 @@ module.exports = grammar(PYTHON, {
                 "envmodules",
                 "group",
                 "handover",
+                "localrule",
                 "params",
                 "priority",
                 "resources",
@@ -293,7 +300,7 @@ module.exports = grammar(PYTHON, {
         ),
 
         // Identifier list (for localrules)
-        __directive_parameters_identifiers: $ => directive_parameters($, repeat1($.identifier)),
+        __directive_parameters_identifiers: $ => directive_parameters($, $.identifier),
         _directive_parameters_identifiers: $ => alias(
             $.__directive_parameters_identifiers,
             $.directive_parameters
@@ -373,12 +380,16 @@ module.exports = grammar(PYTHON, {
     }
 });
 
-function commaSep1(rule) {
-  return sep1(rule, ',')
+function commaSep1(rule, sep_trail = true) {
+  return prec.right(sep1(rule, ',', sep_trail = sep_trail))
 }
 
-function sep1(rule, separator) {
-  return seq(rule, repeat(seq(separator, rule)))
+function sep1(rule, separator, sep_trail = true) {
+  if (sep_trail) {
+    return seq(rule, repeat(seq(separator, rule)), optional(separator))
+  } else {
+    return seq(rule, repeat(seq(separator, rule)))
+  }
 }
 
 function new_directive(name, body_name, parameters) {
@@ -392,24 +403,14 @@ function new_directive(name, body_name, parameters) {
 function directive_parameters($, rule) {
     return(choice(
         // Single line
-        seq(
-            commaSep1(rule),
-            optional(","),
-            $._newline
-        ),
+        seq(commaSep1(rule), $._newline),
         // Indented block
         seq(
-            $._indent,
-            commaSep1(rule),
-            $._dedent
-        ),
-        // On opening line + subsequently indented
-        seq(
-            commaSep1(rule),
-            ",",
+            // Can start on opening line (unindented)
+            optional(seq(commaSep1(rule, sep_trail = false), ",")),
             seq(
                 $._indent,
-                commaSep1(rule),
+                optional(commaSep1(rule)),
                 $._dedent
             ),
         ),
