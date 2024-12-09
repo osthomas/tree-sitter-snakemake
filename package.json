@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "tree-sitter-cli": "^0.24.3",
-    "tree-sitter-python": "^0.23.4"
+    "tree-sitter-cli": "^0.24.4",
+    "tree-sitter-python": "^0.23.5"
   },
   "name": "tree-sitter-snakemake",
   "version": "1.0.0",
