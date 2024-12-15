@@ -206,6 +206,7 @@ module.exports = grammar(PYTHON, {
                 "group",
                 "handover",
                 "localrule",
+                "name",
                 "params",
                 "priority",
                 "resources",

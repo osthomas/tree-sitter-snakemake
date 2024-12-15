@@ -1597,6 +1597,10 @@
             "named": false
           },
           {
+            "type": "name",
+            "named": false
+          },
+          {
             "type": "notebook",
             "named": false
           },
@@ -2390,6 +2394,11 @@
     }
   },
   {
+    "type": "is not",
+    "named": false,
+    "fields": {}
+  },
+  {
     "type": "keyword_argument",
     "named": true,
     "fields": {
@@ -2710,6 +2719,7 @@
   {
     "type": "module",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -2823,6 +2833,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "not in",
+    "named": false,
+    "fields": {}
   },
   {
     "type": "not_operator",
@@ -4041,6 +4056,10 @@
     "named": false
   },
   {
+    "type": "\\",
+    "named": false
+  },
+  {
     "type": "]",
     "named": false
   },
@@ -4261,10 +4280,6 @@
     "named": false
   },
   {
-    "type": "is not",
-    "named": false
-  },
-  {
     "type": "lambda",
     "named": false
   },
@@ -4301,6 +4316,10 @@
     "named": false
   },
   {
+    "type": "name",
+    "named": false
+  },
+  {
     "type": "none",
     "named": true
   },
@@ -4310,10 +4329,6 @@
   },
   {
     "type": "not",
-    "named": false
-  },
-  {
-    "type": "not in",
     "named": false
   },
   {
