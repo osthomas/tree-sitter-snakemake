@@ -174,6 +174,7 @@ module.exports = grammar(PYTHON, {
         _rule_directive_wc_def: $ => new_directive(
             choice(
                 "benchmark",
+                "conda",
                 "input",
                 "log",
                 "output"
@@ -198,7 +199,6 @@ module.exports = grammar(PYTHON, {
         _rule_directive_wc_none: $ => new_directive(
             choice(
                 "cache",
-                "conda",
                 "container",
                 "cwl",
                 "default_target",
