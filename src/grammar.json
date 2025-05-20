@@ -6944,6 +6944,10 @@
               },
               {
                 "type": "STRING",
+                "value": "conda"
+              },
+              {
+                "type": "STRING",
                 "value": "input"
               },
               {
@@ -7025,10 +7029,6 @@
               {
                 "type": "STRING",
                 "value": "cache"
-              },
-              {
-                "type": "STRING",
-                "value": "conda"
               },
               {
                 "type": "STRING",
