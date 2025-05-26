@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-snakemake",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "snakemake grammar for tree-sitter, based on tree-sitter-python",
   "repository": "https://github.com/osthomas/tree-sitter-python",
   "license": "MIT",
