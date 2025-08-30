@@ -11,7 +11,8 @@ module.exports = grammar(PYTHON, {
         $._ALLOW_WC_INTERP,
         $._DISALLOW_WC,
         $._WILDCARD_DEF_OPEN,
-        $._WILDCARD_INTERP_OPEN
+        $._WILDCARD_INTERP_OPEN,
+        $._IN_DIRECTIVE_PARAMETERS // this is a sentinel token and is never emitted
     ]),
 
     inline: ($, original) => original.concat([
@@ -270,41 +271,62 @@ module.exports = grammar(PYTHON, {
 
 
         // DIRECTIVE PARAMETERS
+        //
+        // Directives can receive parameters
+        // -1- on a single line:
+        //      input: "x", "y"
+        // -2- on a line, followed by an indented block:
+        //      input: "x",
+        //          "y",
+        //          "y"
+        // -3- in an indented block:
+        //      input:
+        //          "x",
+        //          "y"
+        //
+        // All of these should be contained in a node (directive_parameters)
+        // The current way of defining two separate rules for each type of
+        // parameter collection is cumbersome.
+        // However, generating a choice rule and aliasing the whole thing as
+        // (directive_parameter) is not ideal, because it includes stray
+        // whitespace for option -3- (it includes the $._indent token).
+        // Aliasing the individual subrules in a function and returning a
+        // combination also does not work because then (directive_parameters)
+        // nodes are being generated, one for each parameter, and not one node
+        // for all parameters as a whole.
+        // This can only be avoided by explicitly defining the individual
+        // subrules before ($._..1/2, see below) and then aliasing those.
 
         // Parameters for directives which do not support wildcards
-        __directive_parameters_wc_none: $ => directive_parameters( $, $._directive_parameter),
-        _directive_parameters_wc_none: $ => alias(
-            $.__directive_parameters_wc_none,
-            $.directive_parameters
+        _directive_parameters1: $ => directiveParametersBlockOnly($, $._directive_parameter),
+        _directive_parameters2: $ => directiveParametersLineAndBlock($, $._directive_parameter),
+        _directive_parameters_wc_none: $ => combineDirectiveParameters(
+            $,
+            $._directive_parameters1,
+            $._directive_parameters2
         ),
 
         // Parameters for directives which allow *definition* of wildcards
-        __directive_parameters_wc_def: $ => seq(
+        _directive_parameters_wc_def: $ => seq(
             $._ALLOW_WC_DEF,
-            directive_parameters($, $._directive_parameter),
+            $._directive_parameters_wc_none,
             $._DISALLOW_WC
-        ),
-        _directive_parameters_wc_def: $ => alias(
-            $.__directive_parameters_wc_def,
-            $.directive_parameters
         ),
 
         // Parameters for directives which allow *interpolation* of wildcards
-        __directive_parameters_wc_interp: $ => seq(
+        _directive_parameters_wc_interp: $ => seq(
             $._ALLOW_WC_INTERP,
-            directive_parameters($, $._directive_parameter),
+            $._directive_parameters_wc_none,
             $._DISALLOW_WC
-        ),
-        _directive_parameters_wc_interp: $ => alias(
-            $.__directive_parameters_wc_interp,
-            $.directive_parameters
         ),
 
         // Identifier list (for localrules)
-        __directive_parameters_identifiers: $ => directive_parameters($, $.identifier),
-        _directive_parameters_identifiers: $ => alias(
-            $.__directive_parameters_identifiers,
-            $.directive_parameters
+        _directive_parameters_identifiers1: $ => directiveParametersBlockOnly($, $.identifier),
+        _directive_parameters_identifiers2: $ => directiveParametersLineAndBlock($, $.identifier),
+        _directive_parameters_identifiers: $ => combineDirectiveParameters(
+            $,
+            $._directive_parameters_identifiers1,
+            $._directive_parameters_identifiers2,
         ),
 
         // Identifier comparisons (for ruleorder)
@@ -393,29 +415,42 @@ function sep1(rule, separator, sep_trail = true) {
   }
 }
 
+function directiveParametersBlockOnly($, parameter_rules) {
+    parameter_rules = choice(parameter_rules, $._IN_DIRECTIVE_PARAMETERS)
+    return(seq(
+        parameter_rules,
+        repeat(seq(",", parameter_rules)),
+        optional(","),
+        $._dedent
+    ))
+}
+
+function directiveParametersLineAndBlock($, parameter_rules) {
+    parameter_rules = choice(parameter_rules, $._IN_DIRECTIVE_PARAMETERS)
+    let rules = seq(parameter_rules, repeat(seq(",", parameter_rules)))
+    let line = seq(rules, optional(","), $._newline)
+    let lineAndblock = seq(
+        rules,
+        ",",
+        $._indent,
+        rules,
+        optional(","),
+        $._dedent
+    )
+    return(choice(line, lineAndblock, $._newline))
+}
+
+function combineDirectiveParameters($, blockOnly, lineAndBlock) {
+    return(choice(
+        seq($._indent, alias(blockOnly, $.directive_parameters)),
+        alias(lineAndBlock, $.directive_parameters),
+    ))
+}
+
 function new_directive(name, body_name, parameters) {
     return seq(
         field("name", name),
         ":",
         field(body_name, parameters)
     )
-}
-
-function directive_parameters($, rule) {
-    return(choice(
-        // Single line
-        seq(commaSep1(rule), $._newline),
-        // Indented block
-        seq(
-            // Can start on opening line (unindented)
-            optional(seq(commaSep1(rule, sep_trail = false), ",")),
-            seq(
-                $._indent,
-                optional(commaSep1(rule)),
-                $._dedent
-            ),
-        ),
-        // empty: this is syntactically invalid, but improves live highlighting
-        $._newline
-    ))
 }

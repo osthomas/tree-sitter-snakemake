@@ -24,6 +24,7 @@ enum TokenType {
     DISALLOW_WC,
     WILDCARD_DEF_OPEN,
     WILDCARD_INTERP_OPEN,
+    IN_DIRECTIVE_PARAMETERS
 };
 
 typedef enum { NONE, DEFINITION, INTERPOLATION } AllowWildcard;
@@ -157,6 +158,10 @@ bool tree_sitter_snakemake_external_scanner_scan(void *payload, TSLexer *lexer, 
 
     bool error_recovery_mode = valid_symbols[STRING_CONTENT] && valid_symbols[INDENT];
     bool within_brackets = valid_symbols[CLOSE_BRACE] || valid_symbols[CLOSE_PAREN] || valid_symbols[CLOSE_BRACKET];
+    // directive parameters behave as if they were bracketed.
+    // IN_DIRECTIVE_PARAMETERS is a sentinel token that is valid only within
+    // directive_parameters 
+    within_brackets = within_brackets || valid_symbols[IN_DIRECTIVE_PARAMETERS];
 
     // Set flag if and which wildcards are allowed. Affects string parsing.
     if (valid_symbols[ALLOW_WC_DEF]) {
