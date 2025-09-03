@@ -40,6 +40,13 @@ module.exports = grammar(PYTHON, {
             $.ruleorder_directive
         ), $.directive),
 
+        // The $._newline separator is important to resolve ambiguities between
+        // string and concatenated string within rules/modules
+        _docstring: $ => seq(choice(
+            $.string,
+            $.concatenated_string
+        ), $._newline),
+
         _simple_directive_wc_none: $ => new_directive(
             choice(
                 "configfile",
@@ -124,13 +131,13 @@ module.exports = grammar(PYTHON, {
         )),
 
         rule_import_list: $ => choice(
-          commaSep1($.identifier),
+          prec.right(commaSep1($.identifier)),
           seq("(", commaSep1($.identifier), ")")
         ),
 
         // as of snakemake 8.4.8, a parenthesized rule exclude list is
         // invalid (as opposed to a parenthesized rule import list)
-        rule_exclude_list: $ => commaSep1($.identifier),
+        rule_exclude_list: $ => prec.right(commaSep1($.identifier)),
 
         _rule_import_as_pattern_target: $ => /[_*\p{XID_Start}][_*\p{XID_Continue}]*/,
 
@@ -153,14 +160,13 @@ module.exports = grammar(PYTHON, {
 
         // analogous to tree-sitter-python: block
         rule_body: $ => seq(
-          repeat(
-            choice(
-              prec(-1, $.string),
-              prec(1, $.concatenated_string), // docstrings
-              $._rule_directive
-            )
-          ),
-          $._dedent
+            repeat(
+                choice(
+                    $._docstring,
+                    $._rule_directive
+                ),
+            ),
+            $._dedent
         ),
 
         // Directives which can appear in rule definitions
@@ -240,10 +246,9 @@ module.exports = grammar(PYTHON, {
         module_body: $ => choice(
             seq(
                 $._indent,
-                repeat1(
+                repeat(
                     choice(
-                        prec(-1, $.string),
-                        prec(1, $.concatenated_string), // docstrings
+                        $._docstring,
                         $._module_directive
                     )
                 ),
@@ -398,13 +403,11 @@ module.exports = grammar(PYTHON, {
         ),
 
         constraint: $ => /([^{}]|(\{\d+\}))+/,
-
-        concatenated_string: ($, original) => prec.right(original)
     }
 });
 
 function commaSep1(rule, sep_trail = true) {
-  return prec.right(sep1(rule, ',', sep_trail = sep_trail))
+  return sep1(rule, ',', sep_trail = sep_trail)
 }
 
 function sep1(rule, separator, sep_trail = true) {
