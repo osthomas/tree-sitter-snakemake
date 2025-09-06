@@ -340,12 +340,12 @@ rule:
       (comment)
       (string (string_start) (string_content) (string_end))
       (directive
+        (comment) (comment)
         (directive_parameters
-          (comment) (comment)
           (integer)))
       (directive
+        (comment) (comment) (comment)
         (directive_parameters
-          (comment) (comment) (comment)
           (integer)))
       (directive
         (directive_parameters
